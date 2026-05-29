@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Красная Метла | Студия Разработки</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Базовые переменные */
+        :root {
+            --bg-page: #f5f5f7;
+            --bg-card: #ffffff;
+            --text-main: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent: #e11d48;
+            --radius: 24px;
+
+            /* 3D Фон */
+            --bg-pattern-front: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' opacity='0.05'%3E%3Ctext x='30' y='60' font-family='monospace' font-size='22' fill='%231d1d1f'%3E%3Ccode/%3E%3C/text%3E%3Ctext x='180' y='120' font-family='monospace' font-size='28' fill='%231d1d1f'%3E%7B %7D%3C/text%3E%3Ctext x='50' y='200' font-family='monospace' font-size='16' fill='%23e11d48'%3Eimport metla%3C/text%3E%3Ctext x='150' y='240' font-family='monospace' font-size='14' fill='%2386868b'%3Eprint('clean')%3C/text%3E%3Ctext x='240' y='50' font-family='monospace' font-size='24' fill='%231d1d1f'%3E=%3E%3C/text%3E%3Ctext x='220' y='210' font-size='40'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='70' y='140' font-size='20'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='120' y='170' font-size='16'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='10' y='270' font-size='20' transform='rotate(15 10 270)'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='260' y='280' font-size='18'%3E%F0%9F%90%9B%3C/text%3E%3C/svg%3E");
+            --bg-pattern-back: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' opacity='0.03'%3E%3Ctext x='10' y='20' font-family='monospace' font-size='10' fill='%2386868b'%3E#%3C/text%3E%3Ctext x='50' y='40' font-family='monospace' font-size='12' fill='%23cbd5e1'%3E()%3C/text%3E%3Ctext x='90' y='15' font-family='monospace' font-size='9' fill='%23cbd5e1'%3E.%3C/text%3E%3Ctext x='100' y='60' font-family='monospace' font-size='11' fill='%2386868b'%3E[]%3C/text%3E%3Ctext x='20' y='80' font-size='10'%3E%F0%9F%A7%B9%3C/text%3E%3Ctext x='70' y='100' font-family='monospace' font-size='12' fill='%23e11d48'%3E&lt;&gt;%3C/text%3E%3Ctext x='110' y='110' font-family='monospace' font-size='8' fill='%23cbd5e1'%3E*%3C/text%3E%3C/svg%3E");
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { font-family: 'Inter', sans-serif; background-color: transparent; color: var(--text-main); line-height: 1.5; overflow-x: hidden; }
+
+        /* СКРОЛЛ-АНИМАЦИИ */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* ПАРАЛЛАКС ФОН */
+        .parallax-wrapper { 
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+            z-index: -1; overflow: hidden; pointer-events: none; 
+            background-color: var(--bg-page); 
+        }
+        .parallax-layer { 
+            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; 
+            background-repeat: repeat; will-change: transform; 
+        }
+        .layer-back { background-image: var(--bg-pattern-back); }
+        .layer-front { background-image: var(--bg-pattern-front); }
+
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+        section { padding: 80px 0; }
+
+        /* Шапка и Лого */
+        header { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        .logo { font-size: 32px; font-weight: 800; display: flex; align-items: center; gap: 12px; cursor: default; }
+        .logo i { font-size: 40px; color: var(--accent); display: inline-block; cursor: pointer; transition: transform 0.3s ease; }
+        .logo i:hover { transform: rotate(-15deg) scale(1.1); }
+        
+        #interactiveLogoText { display: inline-block; cursor: pointer; user-select: none; }
+        .letter { display: inline-block; transition: transform 0.3s ease; }
+        .shake-anim { animation: shakeLogo 0.5s ease-in-out; }
+        @keyframes shakeLogo { 0%, 100% { transform: translateX(0) rotate(0); } 20%, 60% { transform: translateX(-4px) rotate(-4deg); } 40%, 80% { transform: translateX(4px) rotate(4deg); } }
+        .fall-anim { animation: dropLetter 1.5s forwards ease-in; }
+        @keyframes dropLetter { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; pointer-events: none; } }
+        .flying-broom { animation: flySweep 1.5s ease-in-out forwards; }
+        @keyframes flySweep { 0% { transform: translateX(0) rotate(-15deg); } 45% { transform: translateX(100vw) rotate(25deg); opacity: 1; } 49%, 51% { opacity: 0; } 55% { transform: translateX(-100vw) rotate(-25deg); opacity: 1; } 100% { transform: translateX(0) rotate(0deg); } }
+
+        /* Навигация (Десктоп) */
+        .nav-links { display: flex; gap: 20px; font-weight: 500; font-size: 15px; align-items: center; }
+        .nav-links a { transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+        
+        /* Кнопки и Бургер */
+        .btn-small { background: var(--text-main); color: #fff; padding: 10px 20px; border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; z-index: 10; border: none; }
+        .btn-small:hover { background: var(--accent); }
+        .mobile-menu-btn { display: none; font-size: 28px; color: var(--accent); cursor: pointer; }
+        .close-menu-btn { display: none; }
+        .mobile-only-btn { display: none; }
+
+        /* Главный экран (Эффект растворения) */
+        .hero { text-align: center; padding: 100px 0 80px; will-change: opacity, transform, filter; }
+        .hero h1 { font-size: 64px; font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 24px; }
+        .hero p { font-size: 20px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px; }
+        .btn-primary { background: var(--accent); color: #fff; padding: 18px 36px; border-radius: 100px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(225, 29, 72, 0.2); }
+
+        /* Манифест */
+        .manifesto-box { background: #1d1d1f; color: #fff; border-radius: var(--radius); padding: 50px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid #333; position: relative; z-index: 5; }
+        .manifesto-box h2 { font-size: 28px; margin-bottom: 20px; color: var(--accent); }
+        .manifesto-box p { font-size: 18px; line-height: 1.6; color: #a1a1a6; max-width: 800px; margin: 0 auto; }
+
+        /* Общие заголовки секций */
+        .section-title { font-size: 36px; font-weight: 800; margin-bottom: 40px; }
+
+        /* Стек Технологий */
+        .tech-stack-container { display: flex; flex-wrap: wrap; gap: 15px; }
+        .tech-badge { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 25px; border-radius: 100px; font-family: monospace; font-size: 16px; font-weight: 600; color: var(--text-main); border: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 10px; transition: 0.3s; cursor: default; }
+        .tech-badge i { color: var(--accent); font-size: 20px; }
+        .tech-badge:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 20px rgba(225, 29, 72, 0.1); border-color: var(--accent); color: var(--accent); }
+
+        /* Услуги (Bento Grid) */
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .bento-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: var(--radius); padding: 40px; display: flex; flex-direction: column; transition: 0.3s; border: 1px solid rgba(0,0,0,0.02); }
+        .bento-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+        .card-large { grid-column: span 2; background: rgba(29, 29, 31, 0.95); color: #fff; }
+        .card-large p { color: #a1a1a6; }
+        .card-full { grid-column: span 3; flex-direction: row; align-items: center; gap: 40px; }
+        .card-full .bento-icon { font-size: 48px; margin-bottom: 0; }
+        .bento-icon { font-size: 32px; margin-bottom: 20px; color: var(--accent); }
+        .bento-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 10px; }
+        .bento-card p { font-size: 16px; color: var(--text-secondary); }
+
+        /* Этапы работы */
+        .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .step-card { background: rgba(255,255,255,0.9); padding: 30px; border-radius: 20px; border: 1px solid #eee; position: relative; }
+        .step-num { font-size: 48px; font-weight: 800; color: rgba(225, 29, 72, 0.1); position: absolute; top: 10px; right: 20px; }
+        .step-card h3 { font-size: 20px; margin-bottom: 10px; position: relative; z-index: 2; }
+        .step-card p { font-size: 15px; color: var(--text-secondary); position: relative; z-index: 2; }
+
+        /* Кейсы */
+        .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .case-card { background: rgba(255, 255, 255, 0.95); border-radius: var(--radius); padding: 40px; display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.02); }
+        .case-tags { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tag { background: #f2f2f7; color: var(--text-secondary); padding: 6px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+        .case-action { color: var(--accent); font-weight: 600; cursor: pointer; display: inline-block; margin-top: auto; padding-top: 10px; transition: 0.3s; }
+        .case-action:hover { opacity: 0.7; }
+
+        /* Тарифы */
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .pricing-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: var(--radius); padding: 40px; border: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; transition: 0.3s; }
+        .pricing-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        .pricing-card.featured { border: 2px solid var(--accent); transform: scale(1.02); position: relative; }
+        .pricing-card.featured:hover { transform: scale(1.02) translateY(-5px); }
+        .featured-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 5px 15px; border-radius: 100px; font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+        .pricing-card h3 { font-size: 24px; margin-bottom: 10px; }
+        .pricing-price { font-size: 36px; font-weight: 800; margin-bottom: 20px; color: var(--text-main); }
+        .pricing-price span { font-size: 16px; color: var(--text-secondary); font-weight: 500; }
+        .pricing-features { list-style: none; margin-bottom: 30px; flex-grow: 1; }
+        .pricing-features li { margin-bottom: 12px; font-size: 15px; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 10px; }
+        .pricing-features li i { color: var(--accent); margin-top: 4px; }
+        .btn-outline { background: transparent; color: var(--text-main); border: 2px solid var(--text-main); padding: 15px; border-radius: 100px; font-weight: 600; text-align: center; transition: 0.3s; cursor: pointer; display: block; text-decoration: none;}
+        .btn-outline:hover { background: var(--text-main); color: #fff; }
+
+        /* FAQ */
+        .faq-grid { max-width: 800px; margin: 0 auto; }
+        details { background: rgba(255,255,255,0.9); border-radius: 16px; margin-bottom: 15px; border: 1px solid #eaeaea; overflow: hidden; transition: 0.3s; }
+        summary { padding: 20px 25px; font-weight: 600; font-size: 18px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--accent); transition: 0.3s; }
+        details[open] summary { border-bottom: 1px solid #eaeaea; }
+        details[open] summary::after { transform: rotate(180deg); }
+        .faq-content { padding: 20px 25px; color: var(--text-secondary); font-size: 16px; line-height: 1.6; background: #fafafa; }
+
+        /* Форма контактов */
+        .lead-wrapper { background: rgba(255, 255, 255, 0.95); border-radius: var(--radius); padding: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; border: 1px solid rgba(0,0,0,0.02); }
+        .lead-info h2 { font-size: 40px; font-weight: 800; margin-bottom: 20px; }
+        .lead-info p { color: var(--text-secondary); font-size: 18px; margin-bottom: 30px; }
+        form { display: flex; flex-direction: column; gap: 15px; }
+        input, textarea { width: 100%; padding: 18px; border: 1px solid #e5e5ea; border-radius: 16px; font-family: inherit; background: #fafafa; font-size: 16px; }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent); background: #fff; }
+
+        /* Подвал */
+        footer { background: #1d1d1f; color: #fff; padding: 60px 20px 30px; border-radius: 40px 40px 0 0; margin-top: 40px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .footer-col h4 { color: var(--accent); margin-bottom: 20px; font-size: 20px; }
+        .footer-col p, .footer-col a { color: #a1a1a6; font-size: 16px; margin-bottom: 10px; display: block; transition: 0.3s; }
+        .footer-col a:hover { color: #fff; }
+        .footer-bottom { text-align: center; padding-top: 30px; margin-top: 40px; border-top: 1px solid #333; color: #666; font-size: 14px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .legal-link { color: #86868b; text-decoration: underline; cursor: pointer; transition: 0.3s; }
+        .legal-link:hover { color: var(--accent); }
+
+        /* Модальные окна */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #111; color: #fff; border-radius: 20px; padding: 30px; width: 90%; max-width: 400px; position: relative; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid #333; z-index: 1001; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #888; cursor: pointer; background: none; border: none; z-index: 10; }
+        
+        .ms-login { display: flex; flex-direction: column; gap: 15px; }
+        .ms-login h3 { color: var(--accent); font-family: monospace; text-align: center; margin-bottom: 10px; }
+        .ms-input { background: #000; border: 1px solid #333; color: #0f0; font-family: monospace; padding: 12px; border-radius: 8px; font-size: 14px; }
+        .ms-input:focus { outline: none; border-color: var(--accent); }
+        .ms-btn { background: var(--accent); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: monospace; }
+        .ms-chat { display: none; flex-direction: column; height: 350px; }
+        .ms-chat-header { border-bottom: 1px solid #333; padding-bottom: 10px; font-family: monospace; color: #0f0; text-align: center; }
+        .ms-messages { flex-grow: 1; padding: 10px 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 8px 12px; border-radius: 12px; max-width: 80%; font-size: 14px; }
+        .msg.sys { background: #222; align-self: center; color: #888; font-size: 12px; }
+        .msg.in { background: #333; align-self: flex-start; }
+
+        /* Стили для игры GALAXY */
+        #gameCanvas { background: #05050a; border-radius: 12px; width: 100%; height: 400px; display: block; touch-action: none; border: 1px solid #333; box-shadow: inset 0 0 20px #000; }
+        .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(0,0,0,0.7); border-radius: 12px; }
+        .game-btn { background: var(--accent); border: none; padding: 12px 25px; color: white; border-radius: 100px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 16px; text-transform: uppercase; transition: 0.3s; }
+        .game-btn:hover { box-shadow: 0 0 15px var(--accent); transform: scale(1.05); }
+
+        /* Политика конфиденциальности */
+        .policy-content { background-color: #1a1a1a; padding: 10px; max-height: 60vh; overflow-y: auto; font-size: 14px; color: #ccc; line-height: 1.6; }
+        .policy-content h2 { color: var(--accent); margin-bottom: 15px; }
+
+        /* ========================================= */
+        /* АДАПТИВ И МОБИЛЬНОЕ МЕНЮ                  */
+        /* ========================================= */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 48px; }
+            .bento-grid, .timeline, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+            .card-large, .card-full { grid-column: span 2; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .desktop-only-btn { display: none; }
+            
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+                background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
+                flex-direction: column; justify-content: flex-start; align-items: flex-start;
+                padding: 80px 30px; transition: right 0.4s ease;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 1001;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 20px; width: 100%; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
+            
+            .close-menu-btn { display: block; position: absolute; top: 20px; right: 25px; font-size: 40px; background: none; border: none; color: var(--text-main); cursor: pointer; }
+            .mobile-only-btn { display: block; margin-top: 20px; width: 100%; text-align: center; border-bottom: none; }
+
+            .hero h1 { font-size: 36px; } .hero p { font-size: 16px; }
+            .bento-grid, .cases-grid, .lead-wrapper, .timeline, .pricing-grid, .footer-grid { grid-template-columns: 1fr; }
+            .card-large, .card-full { grid-column: span 1; }
+            .card-full { flex-direction: column; align-items: flex-start; gap: 15px; padding: 30px; }
+            .lead-wrapper { padding: 30px 20px; gap: 30px; }
+            .lead-info h2 { font-size: 32px; }
+            .logo { font-size: 28px; } .logo i { font-size: 34px; }
+            .pricing-card.featured { transform: scale(1); }
+            .pricing-card.featured:hover { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="parallax-wrapper">
+        <div class="parallax-layer layer-back"></div>
+        <div class="parallax-layer layer-front"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-broom" id="flyBroom" title="Полетели!"></i> 
+                <div id="interactiveLogoText" title="Урони меня!">
+                    <span class="letter">М</span><span class="letter">Е</span><span class="letter">Т</span><span class="letter">Л</span><span class="letter">А</span>
+                </div>
+            </div>
+            
+            <div class="mobile-menu-btn" id="openMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <nav class="nav-links" id="navPanel">
+                <button class="close-menu-btn" id="closeMenuBtn">&times;</button>
+                <a href="#services">Скиллы</a>
+                <a href="#stack">Стек</a>
+                <a href="#cases">Демо</a>
+                <a href="#pricing">Тарифы</a>
+                <a href="#contact" class="btn-small mobile-only-btn">Обсудить проект</a>
+            </nav>
+            
+            <a href="#contact" class="btn-small desktop-only-btn">Обсудить проект</a>
+        </header>
+
+        <section class="hero reveal" id="heroSection">
+            <h1>Разрабатываем ботов,<br>которые приносят деньги</h1>
+            <p>Автоматизируем бизнес-процессы без лишней рутины. Готовые решения в рекордные сроки.</p>
+            <a href="#contact" class="btn-primary">Заказать разработку</a>
+        </section>
+
+        <section id="manifesto" class="reveal">
+            <div class="manifesto-box">
+                <h2><i class="fa-solid fa-user-secret" style="margin-right: 10px;"></i> Цифровой спецназ для вашего бизнеса</h2>
+                <p>Мы не светим лицами на конференциях. Мы пишем чистый, безотказный код. Приходим, быстро устраняем рутину, настраиваем автоматизацию и уходим, оставляя вам идеально работающий механизм и ключи доступа. Строгий NDA и полная анонимность.</p>
+            </div>
+        </section>
+
+        <section id="stack" class="reveal">
+            <h2 class="section-title">Боевой арсенал</h2>
+            <div class="tech-stack-container">
+                <div class="tech-badge"><i class="fa-brands fa-python"></i> Python 3.14+</div>
+                <div class="tech-badge"><i class="fa-solid fa-robot"></i> Aiogram 3 Framework</div>
+                <div class="tech-badge"><i class="fa-solid fa-database"></i> SQLite / PostgreSQL</div>
+                <div class="tech-badge"><i class="fa-solid fa-mask"></i> Tor & Ngrok Tunnels</div>
+                <div class="tech-badge"><i class="fa-solid fa-mobile-screen"></i> Telegram WebApps</div>
+                <div class="tech-badge"><i class="fa-solid fa-code-merge"></i> REST API Integration</div>
+                <div class="tech-badge"><i class="fa-brands fa-html5"></i> Canvas API (GameDev)</div>
+            </div>
+        </section>
+
+        <section id="services" class="bento-section reveal">
+            <h2 class="section-title">Что мы умеем</h2>
+            <div class="bento-grid">
+                <div class="bento-card card-large reveal delay-1">
+                    <div class="bento-icon"><i class="fa-solid fa-robot"></i></div>
+                    <h3>Умные Telegram-боты</h3>
+                    <p>От простых автоответчиков до сложных многоуровневых систем с базами данных, интеграциями и приемом платежей под ключ.</p>
+                </div>
+                <div class="bento-card reveal delay-2" style="border: 1px solid rgba(225, 29, 72, 0.3);">
+                    <div class="bento-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h3>Вайб-кодинг & ИИ</h3>
+                    <p>Пишем код со скоростью мысли. Используем нейросети для сборки архитектуры за дни, а не месяцы.</p>
+                </div>
+                <div class="bento-card reveal delay-1">
+                    <div class="bento-icon"><i class="fa-solid fa-scissors"></i></div>
+                    <h3>Сфера услуг</h3>
+                    <p>Боты-администраторы для онлайн-записи и удержания клиентов.</p>
+                </div>
+                <div class="bento-card reveal delay-2">
+                    <div class="bento-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <h3>Экология & ТКО</h3>
+                    <p>Системы для учета отходов, логистики и приема заявок.</p>
+                </div>
+                <div class="bento-card reveal delay-3">
+                    <div class="bento-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <h3>Игры & WebApp</h3>
+                    <p>Интерактивные механики внутри Telegram для вовлечения.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cases" class="bento-section reveal">
+            <h2 class="section-title">Наши разработки и демо</h2>
+            <div class="cases-grid">
+                <div class="case-card reveal delay-1">
+                    <div class="case-tags"><span class="tag">AES-256</span><span class="tag">E2E Шифрование</span></div>
+                    <h3>Мессенджер МЕТЛА</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Защищенная корпоративная платформа. Вход по позывному и частоте. Интеграция с внешними БД.</p>
+                    <span class="case-action" onclick="openMessengerModal()"><i class="fa-solid fa-terminal"></i> Запустить терминал &rarr;</span>
+                </div>
+                <div class="case-card reveal delay-2">
+                    <div class="case-tags"><span class="tag">GameDev</span><span class="tag">WebApp</span></div>
+                    <h3>Генерал Метла (Galaxy)</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Космическая аркада. Демонстрация физики, коллизий и сенсорного управления внутри Telegram.</p>
+                    <span class="case-action" onclick="openGameModal()"><i class="fa-solid fa-gamepad"></i> Сыграть в демо &rarr;</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="stages" class="reveal">
+            <h2 class="section-title">Протокол интеграции</h2>
+            <div class="timeline">
+                <div class="step-card reveal delay-1">
+                    <div class="step-num">01</div>
+                    <h3>Инициализация</h3>
+                    <p>Аудит задачи. Вы рассказываете, что болит, мы предлагаем решение.</p>
+                </div>
+                <div class="step-card reveal delay-2">
+                    <div class="step-num">02</div>
+                    <h3>Архитектура</h3>
+                    <p>Вайб-кодинг. Проектируем логику, подключаем БД и API.</p>
+                </div>
+                <div class="step-card reveal delay-3">
+                    <div class="step-num">03</div>
+                    <h3>Полигон</h3>
+                    <p>Стресс-тестирование. Ломаем бота сами до релиза.</p>
+                </div>
+                <div class="step-card reveal delay-1">
+                    <div class="step-num">04</div>
+                    <h3>Деплой</h3>
+                    <p>Заливаем на сервер, передаем вам ключи доступа.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="reveal">
+            <h2 class="section-title">Пакеты услуг</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal delay-1">
+                    <h3>Скрипт / Парсер</h3>
+                    <div class="pricing-price">от 5 000 <span>₽</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Парсинг данных с сайтов</li>
+                        <li><i class="fa-solid fa-check"></i> Базовые скрипты автоматизации</li>
+                        <li><i class="fa-solid fa-check"></i> Выгрузка в Excel / CSV</li>
+                        <li><i class="fa-solid fa-check"></i> Срок: 1-3 дня</li>
+                    </ul>
+                    <a href="#contact" class="btn-outline">Выбрать пакет</a>
+                </div>
+                <div class="pricing-card featured reveal delay-2">
+                    <div class="featured-badge">Частый выбор</div>
+                    <h3>Бизнес-Бот</h3>
+                    <div class="pricing-price">от 15 000 <span>₽</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Сложная логика и меню</li>
+                        <li><i class="fa-solid fa-check"></i> Подключение Базы Данных</li>
+                        <li><i class="fa-solid fa-check"></i> Админ-панель для управления</li>
+                        <li><i class="fa-solid fa-check"></i> Интеграция с платежами</li>
+                        <li><i class="fa-solid fa-check"></i> Срок: 5-10 дней</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary" style="text-align: center;">Выбрать пакет</a>
+                </div>
+                <div class="pricing-card reveal delay-3">
+                    <h3>WebApp / Игры</h3>
+                    <div class="pricing-price">Обсуждается</div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Полноценное Web-приложение</li>
+                        <li><i class="fa-solid fa-check"></i> Геймификация и Canvas</li>
+                        <li><i class="fa-solid fa-check"></i> Интеграция со сторонними CRM</li>
+                        <li><i class="fa-solid fa-check"></i> Поднятие защищенных туннелей</li>
+                        <li><i class="fa-solid fa-check"></i> Пожизненная поддержка (опц.)</li>
+                    </ul>
+                    <a href="#contact" class="btn-outline">Связаться с нами</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="reveal">
+            <h2 class="section-title" style="text-align: center;">Частые вопросы</h2>
+            <div class="faq-grid">
+                <details class="reveal delay-1">
+                    <summary>Нужно ли мне покупать свой сервер?</summary>
+                    <div class="faq-content">Зависит от задачи. Простых ботов мы можем разместить на легких cloud-решениях. Для сложных корпоративных систем с базами данных — настроим ваш личный выделенный сервер (VPS/VDS).</div>
+                </details>
+                <details class="reveal delay-2">
+                    <summary>А что, если бот сломается после сдачи?</summary>
+                    <div class="faq-content">Мы пишем чистый код с обработкой ошибок. На каждый проект мы даем гарантию и период бесплатной технической поддержки.</div>
+                </details>
+                <details class="reveal delay-3">
+                    <summary>На каком языке написаны боты?</summary>
+                    <div class="faq-content">Наш основной стек — Python (с использованием фреймворка Aiogram). Это позволяет делать ботов невероятно быстрыми, надежными и легко масштабируемыми.</div>
+                </details>
+            </div>
+        </section>
+
+        <section id="contact" class="lead-section reveal">
+            <div class="lead-wrapper">
+                <div class="lead-info">
+                    <h2>Инициализировать проект?</h2>
+                    <p>Опишите задачу, и мы предложим оптимальную архитектуру решения без лишней воды.</p>
+                </div>
+                <form id="contactForm">
+                    <input type="text" id="userName" placeholder="Позывной / Имя" required>
+                    <input type="text" id="userContact" placeholder="Telegram username" required>
+                    <textarea id="userTask" rows="3" placeholder="Суть задачи..." required></textarea>
+                    <button type="submit" class="btn-primary">Отправить зашифрованный запрос</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 style="font-size: 24px;"><i class="fa-solid fa-broom" style="color:var(--accent);"></i> МЕТЛА</h4>
+                <p>Цифровой спецназ.<br>Автоматизация и разработка.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Связь</h4>
+                <a href="https://t.me/vdvmetla" target="_blank"><i class="fa-brands fa-telegram"></i> @vdvmetla</a>
+                <a href="mailto:hrenmetla@gmail.com"><i class="fa-solid fa-envelope"></i> hrenmetla@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 METLA Development. Strict NDA. All rights reserved.</span>
+            <span class="legal-link" onclick="document.getElementById('policyModal').style.display='flex'">Политика конфиденциальности</span>
+        </div>
+    </footer>
+
+    <div id="messengerModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModals()">&times;</button>
+            <div id="msLogin" class="ms-login">
+                <h3>[ METLA_SECURE_INIT ]</h3>
+                <input type="text" id="msAlias" class="ms-input" placeholder="Позывной (напр. Ghost)">
+                <input type="number" id="msFreq" class="ms-input" placeholder="Номер частоты (МГц)">
+                <input type="password" id="msKey" class="ms-input" placeholder="Ключ шифрования">
+                <button class="ms-btn" onclick="initMessenger()">ИНИЦИАЛИЗАЦИЯ</button>
+                <p id="msLog" style="color: #0f0; font-size: 12px; font-family: monospace; text-align: center; height: 15px;"></p>
+            </div>
+            <div id="msChat" class="ms-chat">
+                <div class="ms-chat-header" id="chatHeader">FREQ: ??? | ALIAS: ???</div>
+                <div class="ms-messages">
+                    <div class="msg sys">Соединение установлено. Ключ проверен.</div>
+                    <div class="msg in">Штаб: Прием. Как слышно?</div>
+                </div>
+                <div style="display:flex; gap:10px; margin-top:10px;">
+                    <input type="text" class="ms-input" style="flex-grow: 1; padding: 8px;" placeholder="Сообщение..." disabled>
+                    <button class="ms-btn" style="padding: 8px 15px;" disabled>></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameModal" class="modal-overlay">
+        <div class="modal-content" style="padding: 10px; max-width: 320px; background: #05050a; border: 1px solid var(--accent);">
+            <button class="close-btn" onclick="closeModals()" style="color: #fff; text-shadow: 0 0 5px #000; z-index: 20;">&times;</button>
+            <div style="position: relative;">
+                <canvas id="gameCanvas" width="300" height="400"></canvas>
+                <div id="gameUI" class="game-overlay">
+                    <h2 style="color: var(--accent); margin-bottom: 10px; text-align: center;">GALAXY МЕТЛА</h2>
+                    <p style="color: white; text-align: center; font-size: 14px;">Води пальцем/мышкой,<br>чтобы сбивать дронов!</p>
+                    <button class="game-btn" onclick="startGame()">ИГРАТЬ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="policyModal" class="modal-overlay">
+        <div class="modal-content policy-content">
+            <button class="close-btn" onclick="closeModals()">&times;</button>
+            <h2>Политика конфиденциальности</h2>
+            <p>1. Настоящая политика составлена в соответствии с ФЗ-152 «О персональных данных».</p>
+            <p>2. Оставляя заявку на сайте «Красная Метла», вы передаете нам свой позывной и контакт в Telegram.</p>
+            <p>3. Мы используем эти данные исключительно для обратной связи по вашему проекту.</p>
+            <p>4. Мы гарантируем полную анонимность, строгий NDA и не передаем ваши данные третьим лицам или межгалактическим корпорациям.</p>
+        </div>
+    </div>
+
+    <script>
+        /* --- МОБИЛЬНОЕ МЕНЮ (БУРГЕР) --- */
+        const openMenuBtn = document.getElementById('openMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const navPanel = document.getElementById('navPanel');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        openMenuBtn.addEventListener('click', () => navPanel.classList.add('active'));
+        closeMenuBtn.addEventListener('click', () => navPanel.classList.remove('active'));
+        navLinks.forEach(link => link.addEventListener('click', () => navPanel.classList.remove('active')));
+
+        /* АНИМАЦИИ ПРИ СКРОЛЛЕ */
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        /* ИНТЕРАКТИВ ЛОГОТИПА */
+        const logoText = document.getElementById('interactiveLogoText');
+        const letters = document.querySelectorAll('.letter');
+        let textClickCount = 0; let fallingIndex = letters.length - 1;
+
+        logoText.addEventListener('click', function() {
+            textClickCount++;
+            if (textClickCount === 1) {
+                this.classList.add('shake-anim');
+                setTimeout(() => { this.classList.remove('shake-anim'); }, 500);
+            } else {
+                if (fallingIndex >= 0) {
+                    letters[fallingIndex].classList.add('fall-anim');
+                    fallingIndex--;
+                }
+            }
+        });
+
+        /* ПОЛЕТ МЕТЛЫ */
+        document.getElementById('flyBroom').addEventListener('click', function() {
+            if (!this.classList.contains('flying-broom')) {
+                this.classList.add('flying-broom');
+                setTimeout(() => { this.classList.remove('flying-broom'); }, 1500);
+            }
+        });
+
+        /* ========================================================= */
+        /* ИНЖЕНЕРИЯ: ПАРАЛЛАКС И ТУМАН ВОЙНЫ (РАСТВОРЕНИЕ HERO)     */
+        /* ========================================================= */
+        const heroSection = document.getElementById('heroSection');
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            
+            // 1. Движение фона (Параллакс)
+            document.querySelector('.layer-front').style.transform = `translateY(${scrolled * -0.5}px)`;
+            document.querySelector('.layer-back').style.transform = `translateY(${scrolled * -0.15}px)`;
+
+            // 2. Туман войны (Расстворение верхнего блока)
+            if (heroSection) {
+                // Вычисляем прозрачность (исчезает к 500px скролла)
+                let opacity = 1 - (scrolled / 400);
+                // Вычисляем блюр (размытие)
+                let blur = scrolled / 50;
+                // Легкий сдвиг вверх
+                let yOffset = scrolled * 0.3;
+
+                // Защита от отрицательных значений
+                if (opacity < 0) opacity = 0;
+
+                heroSection.style.opacity = opacity;
+                heroSection.style.filter = `blur(${blur}px)`;
+                heroSection.style.transform = `translateY(${yOffset}px)`;
+
+                // Отключаем клики по блоку, если он невидим
+                if (opacity <= 0.1) {
+                    heroSection.style.pointerEvents = 'none';
+                } else {
+                    heroSection.style.pointerEvents = 'auto';
+                }
+            }
+        });
+
+        /* ========================================================= */
+        /* БЕЗОПАСНАЯ ФОРМА С ИНТЕГРАЦИЕЙ GOOGLE SCRIPT              */
+        /* ========================================================= */
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // ТВОЯ РАБОЧАЯ ССЫЛКА ОТ GOOGLE (Уже вставлена!)
+            const webAppUrl = 'https://script.google.com/macros/s/AKfycbwxC6JumA9RHgY6OXNFcPN66ySANvF1WeQ6QMxHCWkbM0EC9tL2noTl90hj97_2qnk/exec'; 
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerText;
+            
+            submitBtn.innerText = 'Шифрование и отправка...';
+            submitBtn.disabled = true;
+
+            const data = {
+                name: document.getElementById('userName').value,
+                contact: document.getElementById('userContact').value,
+                task: document.getElementById('userTask').value
+            };
+
+            fetch(webAppUrl, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                body: JSON.stringify(data) 
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.status === 'success') { 
+                    alert('Шифрованный канал установлен. Заявка доставлена!'); 
+                    this.reset(); 
+                } 
+                else { 
+                    alert('Сбой на сервере. Попробуйте позже.'); 
+                }
+            })
+            .catch(() => alert('Ошибка сети. Проверьте подключение.'))
+            .finally(() => { 
+                submitBtn.innerText = originalText; 
+                submitBtn.disabled = false; 
+            });
+        });
+
+        /* ========================================================= */
+        /* ОБЩИЕ МОДАЛКИ                                             */
+        /* ========================================================= */
+        function closeModals() {
+            document.getElementById('messengerModal').style.display = 'none';
+            document.getElementById('gameModal').style.display = 'none';
+            document.getElementById('policyModal').style.display = 'none';
+            if (typeof gameLoopId !== 'undefined') cancelAnimationFrame(gameLoopId);
+        }
+
+        /* ТЕРМИНАЛ */
+        function openMessengerModal() {
+            document.getElementById('messengerModal').style.display = 'flex';
+            document.getElementById('msLogin').style.display = 'flex';
+            document.getElementById('msChat').style.display = 'none';
+        }
+        function initMessenger() {
+            const alias = document.getElementById('msAlias').value || 'Anonymous';
+            const freq = document.getElementById('msFreq').value || '000.0';
+            const log = document.getElementById('msLog');
+            log.innerText = 'Подключение...';
+            setTimeout(() => { log.innerText = 'Генерация ключей AES-256...'; }, 600);
+            setTimeout(() => { log.innerText = 'Сквозное шифрование (E2E) активно...'; }, 1200);
+            setTimeout(() => {
+                document.getElementById('msLogin').style.display = 'none';
+                document.getElementById('msChat').style.display = 'flex';
+                document.getElementById('chatHeader').innerText = `FREQ: ${freq} | ALIAS: ${alias}`;
+            }, 1800);
+        }
+
+        /* ========================================================= */
+        /* ИГРОВОЙ ДВИЖОК: GALAXY МЕТЛА                              */
+        /* ========================================================= */
+        const canvas = document.getElementById('gameCanvas'); 
+        const ctx = canvas.getContext('2d');
+        let gameLoopId; let frames = 0; let score = 0; let isGameOver = false;
+
+        // Объекты игры
+        const player = { x: 135, y: 340, w: 30, h: 40 };
+        let bullets = []; let enemies = []; let stars = [];
+
+        // Инициализация звезд
+        for(let i=0; i<50; i++) {
+            stars.push({ x: Math.random() * 300, y: Math.random() * 400, size: Math.random() * 2, speed: Math.random() * 2 + 1 });
+        }
+
+        // Управление (Мышь и Тач)
+        function updatePlayerPos(clientX) {
+            let rect = canvas.getBoundingClientRect();
+            // Масштабируем координаты клика под реальный размер канваса (300px)
+            let scaleX = canvas.width / rect.width; 
+            player.x = (clientX - rect.left) * scaleX - player.w / 2;
+            // Ограничения по краям
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.w > canvas.width) player.x = canvas.width - player.w;
+        }
+
+        canvas.addEventListener('mousemove', (e) => { if(!isGameOver) updatePlayerPos(e.clientX); });
+        canvas.addEventListener('touchmove', (e) => {
+            if(!isGameOver) { e.preventDefault(); updatePlayerPos(e.touches[0].clientX); }
+        }, {passive: false});
+
+        function drawGame() {
+            // Фон космоса
+            ctx.fillStyle = '#05050a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Рисуем звезды
+            ctx.fillStyle = '#ffffff';
+            stars.forEach(s => { ctx.fillRect(s.x, s.y, s.size, s.size); });
+
+            // Рисуем метлу (Игрока)
+            ctx.font = "30px Arial"; 
+            ctx.fillText("🧹", player.x, player.y + 30);
+
+            // Рисуем пули (Плазма)
+            ctx.fillStyle = '#e11d48';
+            bullets.forEach(b => { ctx.fillRect(b.x, b.y, b.w, b.h); });
+
+            // Рисуем врагов (Дроны)
+            ctx.font = "24px Arial";
+            enemies.forEach(e => { ctx.fillText("🛸", e.x, e.y + 20); });
+
+            // Очки
+            ctx.fillStyle = "#fff"; ctx.font = "16px monospace"; 
+            ctx.fillText("СБИТО: " + score, 10, 25);
+        }
+
+        function updateGame() {
+            // Движение звезд
+            stars.forEach(s => { s.y += s.speed; if(s.y > canvas.height) { s.y = 0; s.x = Math.random() * 300; } });
+
+            // Автоматическая стрельба каждые 15 кадров
+            if (frames % 15 === 0) {
+                bullets.push({ x: player.x + player.w/2 - 2, y: player.y, w: 4, h: 10, speed: 7 });
+            }
+
+            // Движение пуль
+            bullets.forEach((b, i) => { b.y -= b.speed; if(b.y < 0) bullets.splice(i, 1); });
+
+            // Спавн врагов
+            if (frames % 40 === 0) {
+                enemies.push({ x: Math.random() * (canvas.width - 30), y: -30, w: 30, h: 30, speed: Math.random() * 2 + 2 });
+            }
+
+            // Логика врагов
+            enemies.forEach((e, eIndex) => {
+                e.y += e.speed;
+                // Столкновение с пулей
+                bullets.forEach((b, bIndex) => {
+                    if (b.x < e.x + e.w && b.x + b.w > e.x && b.y < e.y + e.h && b.y + b.h > e.y) {
+                        enemies.splice(eIndex, 1); bullets.splice(bIndex, 1); score++;
+                    }
+                });
+                // Столкновение с игроком (Конец игры)
+                if (e.x < player.x + player.w && e.x + e.w > player.x && e.y < player.y + player.h && e.y + e.h > player.y) {
+                    isGameOver = true;
+                }
+                // Удаление улетевших врагов
+                if (e.y > canvas.height) enemies.splice(eIndex, 1);
+            });
+        }
+
+        function gameLoop() {
+            if(!isGameOver) {
+                updateGame(); drawGame(); frames++;
+                gameLoopId = requestAnimationFrame(gameLoop);
+            } else {
+                document.getElementById('gameUI').style.display = 'flex'; 
+                document.getElementById('gameUI').innerHTML = `<h2 style="color:var(--accent); text-align:center;">СИСТЕМА ВЗЛОМАНА</h2><p style="color:white; margin:10px 0;">Дронов уничтожено: ${score}</p><button class="game-btn" onclick="startGame()">РЕСТАРТ</button>`;
+            }
+        }
+
+        function startGame() { 
+            document.getElementById('gameUI').style.display = 'none'; 
+            player.x = 135; bullets = []; enemies = []; score = 0; frames = 0; isGameOver = false; 
+            if (typeof gameLoopId !== 'undefined') cancelAnimationFrame(gameLoopId); 
+            gameLoop(); 
+        }
+
+        function openGameModal() { 
+            document.getElementById('gameModal').style.display = 'flex'; 
+            document.getElementById('gameUI').style.display = 'flex'; 
+            document.getElementById('gameUI').innerHTML = `<h2 style="color: var(--accent); margin-bottom: 10px; text-align: center;">GALAXY МЕТЛА</h2><p style="color: white; text-align: center; font-size: 14px;">Води пальцем/мышкой,<br>чтобы сбивать дронов!</p><button class="game-btn" onclick="startGame()">ИГРАТЬ</button>`; 
+            drawGame(); // Отрисовка первого кадра (фона)
+        }
+    </script>
+</body>
+</html>
