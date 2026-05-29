@@ -51,8 +51,23 @@
         header { padding: 15px 0; position: sticky; top: 0; z-index: 100; background: rgba(245, 245, 247, 0.85); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
 
-        .logo-3d { display: flex; align-items: center; gap: 10px; font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #1d1d1f; text-transform: uppercase; text-shadow: 1px 1px 0px #fff, 2px 2px 0px #e0e0e0, 3px 3px 0px #d0d0d0, 4px 4px 10px rgba(0,0,0,0.15); transition: var(--transition-apple); }
-        #flyBroom { color: var(--accent); text-shadow: 2px 2px 5px rgba(225, 29, 72, 0.3); cursor: pointer; display: inline-block; transition: 0.3s; }
+        /* ОБНОВЛЕННЫЙ ЛОГОТИП: Строгий текст + Объемная неоновая эмблема */
+        .logo-3d { 
+            display: flex; align-items: center; gap: 10px; font-size: 34px; font-weight: 900; 
+            letter-spacing: -2px; color: #1d1d1f; text-transform: uppercase; 
+            text-shadow: none; /* Убрали WordArt у текста */
+            transition: var(--transition-apple); 
+        }
+        #flyBroom { 
+            color: var(--accent); 
+            /* Твердотельная 3D тень + Неоновое свечение только для метлы */
+            text-shadow: 
+                1px 1px 0 #be123c,
+                2px 2px 0 #9f1239,
+                3px 3px 0 #881337,
+                0 10px 20px rgba(225, 29, 72, 0.5); 
+            cursor: pointer; display: inline-block; transition: 0.3s; 
+        }
         #flyBroom:hover { transform: rotate(-15deg) scale(1.1); }
         #interactiveLogoText { display: inline-block; cursor: pointer; user-select: none; }
         .letter { display: inline-block; transition: transform 0.3s ease; }
@@ -116,9 +131,19 @@
         .span-12 { grid-column: span 12; display: flex; align-items: center; gap: 40px; }
         .span-12 .card-content-wrap { max-width: 50%; flex: 1; }
         
+        /* НОВАЯ АНИМАЦИЯ WEB/SPA (СТИЛЬ AMNEZIA VPN) */
         .abstract-art { position: absolute; right: -20px; bottom: -20px; width: 280px; height: 280px; z-index: 1; transition: var(--transition-apple); border-radius: 20px; box-shadow: var(--shadow-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .apple-card:hover .abstract-art { transform: scale(1.05) rotate(-2deg); }
-        .art-web { background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); }
+        
+        .art-web { background: #0b0f19; }
+        .art-web-grid { position: absolute; top: 0; left: 0; width: 200%; height: 200%; background: repeating-linear-gradient(transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px), repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px); animation: moveGrid 20s linear infinite; }
+        @keyframes moveGrid { 0% { transform: translate(0, 0); } 100% { transform: translate(-30px, -30px); } }
+        
+        .art-web-orb { position: absolute; border-radius: 50%; filter: blur(25px); animation: orbFloat 6s ease-in-out infinite alternate; }
+        .orb-red { width: 150px; height: 150px; background: radial-gradient(circle, rgba(225,29,72,0.6), transparent 70%); top: 10px; left: 10px; }
+        .orb-blue { width: 120px; height: 120px; background: radial-gradient(circle, rgba(56,189,248,0.6), transparent 70%); bottom: 10px; right: 10px; animation-direction: alternate-reverse; animation-duration: 8s; }
+        @keyframes orbFloat { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(30px,20px) scale(1.2); } }
+
         .art-dashboard { position: relative; right: 0; bottom: 0; flex: 1; height: 280px; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: var(--shadow-soft); }
 
         /* ТАРИФЫ */
@@ -153,23 +178,61 @@
         .btn-pricing-solid { background: var(--accent); border: 2px solid var(--accent); color: #fff; box-shadow: var(--shadow-glow); }
         .btn-pricing-solid:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 
-        /* ВИЗУАЛИЗАЦИЯ & ДЕМО */
+        /* ВИЗУАЛИЗАЦИЯ & ДЕМО (НЕОНОВЫЕ ПЛИТКИ) */
         .demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-        .demo-card { background: #1d1d1f; color: #fff; border-radius: var(--radius-large); padding: 50px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: var(--transition-apple); border: 1px solid #333; }
-        .demo-card:hover { transform: translateY(-10px); border-color: #555; box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
-        .demo-card h3 { font-size: 32px; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
-        .demo-card p { font-size: 17px; color: #a1a1a6; margin-bottom: 30px; max-width: 80%; line-height: 1.6; }
+        .demo-card { 
+            background: #1d1d1f; color: #fff; border-radius: var(--radius-large); 
+            padding: 50px; position: relative; overflow: hidden; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: var(--transition-apple); 
+            border: 1px solid #333; z-index: 1;
+        }
         
-        .tags-container { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .demo-card.neon-blue { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: rgba(56, 189, 248, 0.4); }
+        .demo-card.neon-blue:hover { border-color: #38bdf8; box-shadow: 0 20px 50px rgba(56, 189, 248, 0.2); transform: translateY(-10px); }
+        
+        .demo-card.neon-purple { background: linear-gradient(135deg, #170f2a 0%, #2e1a47 100%); border-color: rgba(200, 130, 255, 0.4); }
+        .demo-card.neon-purple:hover { border-color: #c882ff; box-shadow: 0 20px 50px rgba(200, 130, 255, 0.2); transform: translateY(-10px); }
+
+        .demo-card.neon-green { background: linear-gradient(135deg, #0a1a0f 0%, #13381e 100%); border-color: rgba(50, 215, 75, 0.4); }
+        .demo-card.neon-green:hover { border-color: #32d74b; box-shadow: 0 20px 50px rgba(50, 215, 75, 0.2); transform: translateY(-10px); }
+        
+        .demo-card.neon-cyan { background: linear-gradient(135deg, #0f0c29 0%, #171b36 100%); border-color: rgba(0, 255, 255, 0.4); }
+        .demo-card.neon-cyan:hover { border-color: #0ff; box-shadow: 0 20px 50px rgba(0, 255, 255, 0.2); transform: translateY(-10px); }
+
+        .demo-card h3 { font-size: 32px; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; position: relative; z-index: 2; transition: 0.3s; }
+        .demo-card p { font-size: 17px; color: #cbd5e1; margin-bottom: 30px; max-width: 80%; line-height: 1.6; position: relative; z-index: 2; }
+        
+        .tags-container { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; position: relative; z-index: 2; }
         .demo-badge { background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-        .demo-badge.aes { background: rgba(50, 215, 75, 0.15); color: var(--term-green); border: 1px solid rgba(50, 215, 75, 0.3); }
-        .demo-badge.ai { background: rgba(138, 43, 226, 0.15); color: #c882ff; border: 1px solid rgba(138, 43, 226, 0.3); }
+        .demo-badge.neon-blue { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .demo-badge.neon-purple { background: rgba(200, 130, 255, 0.15); color: #c882ff; border: 1px solid rgba(200, 130, 255, 0.3); }
+        .demo-badge.neon-green { background: rgba(50, 215, 75, 0.15); color: var(--term-green); border: 1px solid rgba(50, 215, 75, 0.3); }
+        .demo-badge.neon-cyan { background: rgba(0, 255, 255, 0.15); color: #0ff; border: 1px solid rgba(0, 255, 255, 0.3); }
         
-        .demo-action { display: inline-flex; align-items: center; gap: 10px; color: #fff; font-weight: 600; cursor: pointer; padding-bottom: 5px; transition: 0.3s; font-size: 16px; }
-        .demo-card:hover .demo-action { color: var(--accent); }
+        .demo-action { display: inline-flex; align-items: center; gap: 10px; color: #fff; font-weight: 600; cursor: pointer; padding-bottom: 5px; transition: 0.3s; font-size: 16px; position: relative; z-index: 2; }
+        .demo-action i { transition: 0.3s; }
+        
+        .demo-card.neon-blue:hover h3 { text-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
+        .demo-card.neon-blue:hover .demo-action { color: #38bdf8; text-shadow: 0 0 8px rgba(56, 189, 248, 0.8); }
+        .demo-card.neon-purple:hover h3 { text-shadow: 0 0 15px rgba(200, 130, 255, 0.5); }
+        .demo-card.neon-purple:hover .demo-action { color: #c882ff; text-shadow: 0 0 8px rgba(200, 130, 255, 0.8); }
+        .demo-card.neon-green:hover h3 { text-shadow: 0 0 15px rgba(50, 215, 75, 0.5); }
+        .demo-card.neon-green:hover .demo-action { color: #32d74b; text-shadow: 0 0 8px rgba(50, 215, 75, 0.8); }
+        .demo-card.neon-cyan:hover h3 { text-shadow: 0 0 15px rgba(0, 255, 255, 0.5); }
+        .demo-card.neon-cyan:hover .demo-action { color: #0ff; text-shadow: 0 0 8px rgba(0, 255, 255, 0.8); }
+
         .demo-card:hover .demo-action i { transform: translateX(5px); }
-        .demo-bg { position: absolute; right: -30px; bottom: -30px; opacity: 0.05; transition: 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-        .demo-card:hover .demo-bg { opacity: 0.15; transform: scale(1.1) rotate(-5deg); filter: blur(2px); }
+
+        .demo-bg { position: absolute; right: -30px; bottom: -30px; opacity: 0.1; transition: 0.8s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
+        .demo-card.neon-blue .demo-bg { color: #38bdf8; }
+        .demo-card.neon-purple .demo-bg { color: #c882ff; }
+        .demo-card.neon-green .demo-bg { color: #32d74b; }
+        .demo-card.neon-cyan .demo-bg { color: #0ff; }
+        .demo-card:hover .demo-bg { opacity: 0.2; transform: scale(1.1) rotate(-5deg); filter: blur(2px); }
+
+        .cyber-grid-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: 20px 20px; background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); opacity: 0.3; pointer-events: none; z-index: 0; }
+
+        .arcade-card-wide { grid-column: 1 / -1; }
 
         /* БАЗА ЗНАНИЙ (FAQ ACCORDION) */
         .faq-container { max-width: 800px; margin: 0 auto; }
@@ -251,9 +314,18 @@
         .msg.out { background: rgba(50,215,75,0.3); align-self: flex-end; }
         .chat-input-area { display: flex; gap: 10px; margin-top: 15px; }
 
-        #gameCanvas { background: #000; border-radius: 16px; width: 100%; height: 400px; border: 1px solid #333; }
+        /* ОФОРМЛЕНИЕ ИГРЫ (ARCADE NEON) */
+        .arcade-modal-bg { background: #05050a !important; border: 2px solid #0ff; box-shadow: 0 0 40px rgba(0, 255, 255, 0.2); }
+        .arcade-modal-bg .modal-close { background: #0ff; color: #000; }
+        .arcade-modal-bg .modal-close:hover { background: #f0f; box-shadow: 0 0 15px #f0f; }
+        .arcade-wrapper { position: relative; width: 100%; height: 450px; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid #222; }
+        #gameCanvas { display: block; width: 100%; height: 100%; }
+        /* Эффект старого телевизора */
+        .crt-scanlines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 3px 100%; pointer-events: none; z-index: 10; }
+        .btn-neon { background: transparent; color: #0ff; border: 2px solid #0ff; padding: 15px; width: 100%; border-radius: 12px; font-family: monospace; font-size: 18px; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; margin-top: 20px; box-shadow: inset 0 0 10px rgba(0,255,255,0.2), 0 0 10px rgba(0,255,255,0.2); }
+        .btn-neon:hover { background: #0ff; color: #000; box-shadow: 0 0 20px #0ff; }
 
-        /* АДАПТИВ (МЕДИА-ЗАПРОСЫ) И ИСПРАВЛЕНИЕ МЕНЮ */
+        /* АДАПТИВ (МЕДИА-ЗАПРОСЫ) */
         @media (max-width: 992px) {
             .span-8, .span-4, .span-6 { grid-column: span 12; }
             .card-content-wrap { max-width: 100%; }
@@ -278,8 +350,6 @@
             }
             .nav-links.active { right: 0; }
             .nav-links a { font-size: 20px; width: 100%; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 15px; color: var(--text-main); }
-            
-            /* ВОЗВРАЩАЕМ КРЕСТИК НА МОБИЛКАХ С ВЫСШИМ ПРИОРИТЕТОМ */
             .close-menu-btn { display: block !important; position: absolute; top: 20px; right: 25px; font-size: 40px; background: none; border: none; color: var(--text-main); cursor: pointer; z-index: 1002; }
 
             .hero h1 { font-size: 40px; }
@@ -338,13 +408,11 @@
                         <div class="card-title">Веб-разработка & SPA</div>
                         <div class="card-text">Проектируем премиальные сайты. От лендингов с высокой конверсией до сложных Single Page Applications. Безупречный UI/UX, оптимизация под SEO и 100 баллов в Google PageSpeed.</div>
                     </div>
+                    <!-- НОВАЯ АНИМАЦИЯ: СФЕРЫ + КИБЕР СЕТКА -->
                     <div class="abstract-art art-web">
-                        <svg viewBox="0 0 100 100" width="70%" height="70%" opacity="0.9">
-                           <rect x="10" y="10" width="80" height="12" rx="3" fill="#cbd5e1"/>
-                           <rect x="10" y="28" width="40" height="40" rx="4" fill="#94a3b8"/>
-                           <rect x="55" y="28" width="35" height="15" rx="3" fill="#e11d48" opacity="0.9"/>
-                           <rect x="55" y="48" width="35" height="20" rx="3" fill="#e2e8f0"/>
-                        </svg>
+                        <div class="art-web-grid"></div>
+                        <div class="art-web-orb orb-red"></div>
+                        <div class="art-web-orb orb-blue"></div>
                     </div>
                 </div>
 
@@ -390,6 +458,7 @@
             </div>
             
             <div class="pricing-grid">
+                <!-- Пакет 1: БОТЫ -->
                 <div class="pricing-card">
                     <div class="pricing-header">
                         <h3 class="pricing-title">Telegram-Боты</h3>
@@ -411,6 +480,7 @@
                     <a href="#contact" class="btn-pricing btn-pricing-outline">Выбрать тариф</a>
                 </div>
 
+                <!-- Пакет 2: WEB-APP -->
                 <div class="pricing-card featured">
                     <div class="badge-popular">Топ выбор</div>
                     <div class="pricing-header">
@@ -433,6 +503,7 @@
                     <a href="#contact" class="btn-pricing btn-pricing-solid">Обсудить систему</a>
                 </div>
 
+                <!-- Пакет 3: САЙТЫ -->
                 <div class="pricing-card">
                     <div class="pricing-header">
                         <h3 class="pricing-title">Web & Сайты</h3>
@@ -479,49 +550,69 @@
                 <h2>Визуализация & Демо</h2>
                 <p>Оцените механику решений в реальном времени</p>
             </div>
+            
             <div class="demo-grid">
-                
-                <div class="demo-card">
+                <!-- СПЕЦ-КАРТОЧКА: АРКАДА (НА ВСЮ ШИРИНУ) -->
+                <div class="demo-card arcade-card-wide neon-cyan">
+                    <div class="cyber-grid-bg"></div>
                     <div class="tags-container">
-                        <span class="demo-badge">Telegram TMA</span>
+                        <span class="demo-badge neon-cyan"><i class="fa-solid fa-gamepad"></i> HTML5 Canvas</span>
+                        <span class="demo-badge neon-cyan">Web Game Engine</span>
+                    </div>
+                    <h3>Neon Galaxy Arcade</h3>
+                    <p style="color: #cbd5e1;">Кастомный игровой микро-движок. Векторная отрисовка, физика частиц и эффекты свечения на чистом JavaScript. Вызывает зависимость.</p>
+                    <div class="demo-action neon-text" onclick="openGameModal()">Нажми Start <i class="fa-solid fa-arrow-right"></i></div>
+                    <i class="fa-solid fa-gamepad demo-bg" style="font-size: 180px;"></i>
+                </div>
+
+                <!-- Неон Магазин (Cyan/Blue) -->
+                <div class="demo-card neon-blue">
+                    <div class="cyber-grid-bg"></div>
+                    <div class="tags-container">
+                        <span class="demo-badge neon-blue">Telegram TMA</span>
                     </div>
                     <h3>E-Commerce WebApp</h3>
                     <p>Демонстрация мобильного интерфейса магазина внутри Telegram. Идеальный UX для быстрых покупок.</p>
                     <div class="demo-action" onclick="openModal('storeModal')">Открыть магазин <i class="fa-solid fa-arrow-right"></i></div>
-                    <i class="fa-solid fa-mobile-screen demo-bg" style="font-size: 180px;"></i>
+                    <i class="fa-solid fa-mobile-screen demo-bg"></i>
                 </div>
 
-                <div class="demo-card" style="background: #101014;">
+                <!-- Неон AI (Purple/Magenta) -->
+                <div class="demo-card neon-purple">
+                    <div class="cyber-grid-bg"></div>
                     <div class="tags-container">
-                        <span class="demo-badge ai"><i class="fa-solid fa-brain"></i> AI Agent</span>
+                        <span class="demo-badge neon-purple"><i class="fa-solid fa-brain"></i> AI Agent</span>
                     </div>
                     <h3>Умный Ассистент</h3>
                     <p>Имитация работы нейросети, интегрированной в корпоративный чат для автоматической поддержки клиентов.</p>
                     <div class="demo-action" onclick="openAiModal()">Запустить AI тест <i class="fa-solid fa-arrow-right"></i></div>
-                    <i class="fa-solid fa-microchip demo-bg" style="font-size: 180px;"></i>
+                    <i class="fa-solid fa-microchip demo-bg"></i>
                 </div>
 
-                <div class="demo-card" style="background: #141416;">
+                <!-- Неон Парсер (Blue) -->
+                <div class="demo-card neon-blue">
+                    <div class="cyber-grid-bg"></div>
                     <div class="tags-container">
-                        <span class="demo-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">Big Data</span>
+                        <span class="demo-badge neon-blue">Big Data</span>
                     </div>
                     <h3>Парсер Данных</h3>
                     <p>Демонстрация работы скрипта по автоматическому сбору и структурированию данных с внешних ресурсов.</p>
                     <div class="demo-action" onclick="openParserModal()">Смотреть процесс <i class="fa-solid fa-arrow-right"></i></div>
-                    <i class="fa-solid fa-database demo-bg" style="font-size: 180px;"></i>
+                    <i class="fa-solid fa-database demo-bg"></i>
                 </div>
 
-                <div class="demo-card">
+                <!-- Неон Терминал (Green Fallout) -->
+                <div class="demo-card neon-green">
+                    <div class="cyber-grid-bg"></div>
                     <div class="tags-container">
-                        <span class="demo-badge aes"><i class="fa-solid fa-shield-halved"></i> AES-256</span>
-                        <span class="demo-badge aes">E2E Шифрование</span>
+                        <span class="demo-badge neon-green"><i class="fa-solid fa-shield-halved"></i> AES-256</span>
+                        <span class="demo-badge neon-green">E2E Шифрование</span>
                     </div>
                     <h3>Терминал METLA</h3>
                     <p>Защищенная корпоративная консоль. Вход по позывному и частоте. Защита от перехвата пакетов.</p>
                     <div class="demo-action" onclick="openTerminalModal()">Войти в систему <i class="fa-solid fa-arrow-right"></i></div>
-                    <i class="fa-solid fa-terminal demo-bg" style="font-size: 180px;"></i>
+                    <i class="fa-solid fa-terminal demo-bg"></i>
                 </div>
-
             </div>
         </section>
 
@@ -593,6 +684,11 @@
         </div>
     </footer>
 
+    <!-- ======================================================= -->
+    <!-- МОДАЛЬНЫЕ ОКНА ДЕМОНСТРАЦИЙ                             -->
+    <!-- ======================================================= -->
+
+    <!-- МАГАЗИН WEBAPP -->
     <div id="storeModal" class="modal-overlay">
         <div class="modal-apple" style="background: transparent; box-shadow: none;">
             <button class="modal-close" style="background:#fff; right: 0; top: 0;" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
@@ -613,6 +709,7 @@
         </div>
     </div>
 
+    <!-- AI АССИСТЕНТ -->
     <div id="aiModal" class="modal-overlay">
         <div class="modal-apple ai-bg">
             <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
@@ -629,6 +726,7 @@
         </div>
     </div>
 
+    <!-- ПАРСЕР ДАННЫХ -->
     <div id="parserModal" class="modal-overlay">
         <div class="modal-apple parser-bg">
             <button class="modal-close" style="color:#fff;" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
@@ -646,6 +744,7 @@
         </div>
     </div>
 
+    <!-- ТЕРМИНАЛ FALLOUT -->
     <div id="terminalModal" class="modal-overlay">
         <div class="modal-apple fallout-bg">
             <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
@@ -673,12 +772,16 @@
         </div>
     </div>
 
+    <!-- НОВАЯ АРКАДА GALAXY -->
     <div id="gameModal" class="modal-overlay">
-        <div class="modal-apple" style="background: #1d1d1f; border: 1px solid #333;">
-            <button class="modal-close" style="color:#fff;" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
-            <h3 style="color: #fff; margin-bottom: 15px; text-align: center;">GALAXY МЕТЛА</h3>
-            <canvas id="gameCanvas" width="300" height="400"></canvas>
-            <button class="btn-apple" style="width: 100%; margin-top: 15px; background: var(--accent);" onclick="startGame()">Старт / Рестарт</button>
+        <div class="modal-apple arcade-modal-bg">
+            <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="color: #fff; margin-bottom: 15px; text-align: center; text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; font-family: monospace;">NEON GALAXY</h3>
+            <div class="arcade-wrapper">
+                <div class="crt-scanlines"></div>
+                <canvas id="gameCanvas" width="320" height="450"></canvas>
+            </div>
+            <button class="btn-neon" onclick="startGame()">▶ START SYSTEM</button>
         </div>
     </div>
 
@@ -783,7 +886,6 @@
             const modal = document.getElementById(id);
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('active'), 10);
-            if (id === 'gameModal') drawGame();
         }
 
         function closeModals() {
@@ -903,14 +1005,22 @@
             .finally(() => { submitBtn.innerText = originalText; submitBtn.disabled = false; });
         });
 
-        // ИГРА GALAXY
+        // ==========================================
+        // НОВЫЙ ДВИЖОК GALAXY NEON (Custom Rendering)
+        // ==========================================
         const canvas = document.getElementById('gameCanvas'); 
         const ctx = canvas.getContext('2d');
         let gameLoopId; let frames = 0; let score = 0; let isGameOver = false;
 
-        const player = { x: 135, y: 340, w: 30, h: 40 };
-        let bullets = []; let enemies = []; let stars = [];
-        for(let i=0; i<40; i++) stars.push({ x: Math.random() * 300, y: Math.random() * 400, size: Math.random() * 2, speed: Math.random() * 2 + 1 });
+        const player = { x: 145, y: 380, w: 30, h: 40 };
+        let bullets = []; let enemies = []; let stars = []; let particles = [];
+
+        for(let i=0; i<60; i++) stars.push({ x: Math.random() * 320, y: Math.random() * 450, size: Math.random() * 2, speed: Math.random() * 2 + 0.5, color: Math.random() > 0.5 ? '#0ff' : '#fff' });
+
+        function openGameModal() {
+            openModal('gameModal');
+            drawGame(); // Рисуем первый пустой кадр
+        }
 
         function updatePlayerPos(clientX) {
             let rect = canvas.getBoundingClientRect();
@@ -923,43 +1033,137 @@
         canvas.addEventListener('mousemove', (e) => { if(!isGameOver) updatePlayerPos(e.clientX); });
         canvas.addEventListener('touchmove', (e) => { if(!isGameOver && e.target === canvas) { e.preventDefault(); updatePlayerPos(e.touches[0].clientX); } }, {passive: false});
 
+        function createExplosion(x, y, color) {
+            for(let i=0; i<15; i++) {
+                particles.push({
+                    x: x, y: y,
+                    vx: (Math.random() - 0.5) * 6, vy: (Math.random() - 0.5) * 6,
+                    life: 1, color: color
+                });
+            }
+        }
+
         function drawGame() {
-            ctx.fillStyle = '#000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#fff'; stars.forEach(s => { ctx.fillRect(s.x, s.y, s.size, s.size); });
-            if(!isGameOver) { ctx.font = "30px Arial"; ctx.fillText("🧹", player.x, player.y + 30); }
-            ctx.fillStyle = '#e11d48'; bullets.forEach(b => { ctx.fillRect(b.x, b.y, b.w, b.h); });
-            ctx.font = "24px Arial"; enemies.forEach(e => { ctx.fillText("🛸", e.x, e.y + 20); });
-            ctx.fillStyle = "#fff"; ctx.font = "14px Inter"; ctx.fillText("SCORE: " + score, 10, 25);
+            // Очистка с легким трейлом
+            ctx.fillStyle = 'rgba(5, 5, 10, 0.4)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Звезды
+            stars.forEach(s => { 
+                ctx.fillStyle = s.color; 
+                ctx.globalAlpha = Math.random() * 0.5 + 0.5;
+                ctx.fillRect(s.x, s.y, s.size, s.size); 
+            });
+            ctx.globalAlpha = 1;
+
+            if(!isGameOver) { 
+                // Рендер Корабля (Neon Triangle)
+                ctx.shadowBlur = 15; ctx.shadowColor = '#0ff';
+                ctx.fillStyle = 'transparent'; ctx.strokeStyle = '#0ff'; ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(player.x + player.w/2, player.y);
+                ctx.lineTo(player.x + player.w, player.y + player.h);
+                ctx.lineTo(player.x + player.w/2, player.y + player.h - 10);
+                ctx.lineTo(player.x, player.y + player.h);
+                ctx.closePath();
+                ctx.stroke();
+                
+                // Двигатель
+                ctx.fillStyle = '#f0f'; ctx.shadowColor = '#f0f';
+                ctx.beginPath();
+                ctx.arc(player.x + player.w/2, player.y + player.h, Math.random() * 4 + 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Рендер Пуль
+            ctx.shadowBlur = 10; ctx.shadowColor = '#fff'; ctx.fillStyle = '#fff';
+            bullets.forEach(b => { ctx.fillRect(b.x, b.y, b.w, b.h); });
+
+            // Рендер Врагов (Neon Diamonds)
+            ctx.shadowBlur = 15; ctx.shadowColor = '#f0f';
+            ctx.strokeStyle = '#f0f'; ctx.lineWidth = 2;
+            enemies.forEach(e => { 
+                ctx.save();
+                ctx.translate(e.x + e.w/2, e.y + e.h/2);
+                ctx.rotate(frames * 0.05); // Вращение
+                ctx.beginPath();
+                ctx.moveTo(0, -e.h/2); ctx.lineTo(e.w/2, 0); ctx.lineTo(0, e.h/2); ctx.lineTo(-e.w/2, 0);
+                ctx.closePath();
+                ctx.stroke();
+                ctx.restore();
+            });
+
+            // Рендер Частиц
+            ctx.shadowBlur = 5;
+            particles.forEach(p => {
+                ctx.shadowColor = p.color; ctx.fillStyle = p.color;
+                ctx.globalAlpha = Math.max(0, p.life);
+                ctx.fillRect(p.x, p.y, 3, 3);
+            });
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0; // Reset shadow
+
+            // Очки
+            ctx.fillStyle = "#0ff"; ctx.font = "bold 16px monospace"; 
+            ctx.fillText("SCORE: " + score, 10, 25);
 
             if(isGameOver) {
-                ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-                ctx.fillStyle = '#e11d48'; ctx.font = "bold 24px Inter"; ctx.textAlign = "center";
-                ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2);
-                ctx.fillStyle = '#fff'; ctx.font = "16px Inter"; ctx.fillText("Score: " + score, canvas.width/2, canvas.height/2 + 30);
-                ctx.textAlign = "left";
+                ctx.fillStyle = 'rgba(0,0,0,0.8)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle = '#f0f'; ctx.font = "bold 28px monospace"; ctx.textAlign = "center";
+                ctx.shadowBlur = 20; ctx.shadowColor = '#f0f';
+                ctx.fillText("SYSTEM FAILURE", canvas.width/2, canvas.height/2);
+                ctx.fillStyle = '#0ff'; ctx.font = "18px monospace"; ctx.shadowColor = '#0ff';
+                ctx.fillText("Final Score: " + score, canvas.width/2, canvas.height/2 + 40);
+                ctx.textAlign = "left"; ctx.shadowBlur = 0;
             }
         }
 
         function updateGame() {
-            stars.forEach(s => { s.y += s.speed; if(s.y > canvas.height) { s.y = 0; s.x = Math.random() * 300; } });
-            if (frames % 15 === 0) { bullets.push({ x: player.x + player.w/2 - 2, y: player.y, w: 4, h: 10, speed: 7 }); }
-            bullets.forEach((b, i) => { b.y -= b.speed; if(b.y < 0) bullets.splice(i, 1); });
-            if (frames % 40 === 0) { enemies.push({ x: Math.random() * (canvas.width - 30), y: -30, w: 30, h: 30, speed: Math.random() * 2 + 2 }); }
+            // Звезды
+            stars.forEach(s => { s.y += s.speed; if(s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; } });
+            
+            // Частицы
+            for(let i = particles.length - 1; i >= 0; i--) {
+                let p = particles[i];
+                p.x += p.vx; p.y += p.vy; p.life -= 0.03;
+                if(p.life <= 0) particles.splice(i, 1);
+            }
 
+            // Выстрелы
+            if (frames % 12 === 0) { bullets.push({ x: player.x + player.w/2 - 1, y: player.y, w: 2, h: 15, speed: 10 }); }
+            bullets.forEach((b, i) => { b.y -= b.speed; if(b.y < 0) bullets.splice(i, 1); });
+            
+            // Спавн врагов
+            if (frames % 35 === 0) { enemies.push({ x: Math.random() * (canvas.width - 30), y: -30, w: 25, h: 25, speed: Math.random() * 2 + 2 }); }
+
+            // Логика врагов
             enemies.forEach((e, eIndex) => {
                 e.y += e.speed;
                 bullets.forEach((b, bIndex) => {
                     if (b.x < e.x + e.w && b.x + b.w > e.x && b.y < e.y + e.h && b.y + b.h > e.y) {
-                        enemies.splice(eIndex, 1); bullets.splice(bIndex, 1); score++;
+                        createExplosion(e.x + e.w/2, e.y + e.h/2, '#f0f'); // Взрыв врага
+                        enemies.splice(eIndex, 1); bullets.splice(bIndex, 1); score += 10;
                     }
                 });
-                if (e.x < player.x + player.w && e.x + e.w > player.x && e.y < player.y + player.h && e.y + e.h > player.y) { isGameOver = true; }
+                if (e.x < player.x + player.w && e.x + e.w > player.x && e.y < player.y + player.h && e.y + e.h > player.y) {
+                    createExplosion(player.x + player.w/2, player.y + player.h/2, '#0ff'); // Взрыв игрока
+                    isGameOver = true; 
+                }
                 if (e.y > canvas.height) enemies.splice(eIndex, 1);
             });
         }
 
-        function gameLoop() { if(!isGameOver) { updateGame(); frames++; } drawGame(); if(!isGameOver) { gameLoopId = requestAnimationFrame(gameLoop); } }
-        function startGame() { player.x = 135; bullets = []; enemies = []; score = 0; frames = 0; isGameOver = false; if (typeof gameLoopId !== 'undefined') cancelAnimationFrame(gameLoopId); gameLoop(); }
+        function gameLoop() { 
+            if(!isGameOver) { updateGame(); frames++; } 
+            drawGame(); 
+            if(!isGameOver || particles.length > 0) { gameLoopId = requestAnimationFrame(gameLoop); } 
+        }
+        
+        function startGame() { 
+            player.x = 145; bullets = []; enemies = []; particles = []; score = 0; frames = 0; isGameOver = false; 
+            if (typeof gameLoopId !== 'undefined') cancelAnimationFrame(gameLoopId); 
+            gameLoop(); 
+        }
     </script>
 </body>
 </html>
+
