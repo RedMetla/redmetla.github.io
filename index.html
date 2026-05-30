@@ -14,6 +14,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(109526486, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/109526486" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
     <style>
         /* БАЗОВЫЕ ПЕРЕМЕННЫЕ */
         :root {
@@ -1202,7 +1220,7 @@
             const lastSubmit = localStorage.getItem('metla_last_submit');
             const now = Date.now();
             if (lastSubmit && now - lastSubmit < 60000) { alert('🛡 Защита от спама: Подождите минуту.'); return; }
-            const webAppUrl = 'https://script.google.com/macros/s/AKfycbyS9pmQ9DZFFacYfdiJte49dMwNa1WWUSSDwJ599Cj92tIDeQ9HRgoJIoCjJCX39OBUfw/exec'; 
+            const webAppUrl = 'https://script.google.com/macros/s/AKfycbwxC6JumA9RHgY6OXNFcPN66ySANvF1WeQ6QMxHCWkbM0EC9tL2noTl90hj97_2qnk/exec'; 
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerText;
             submitBtn.innerText = 'Шифрование...';
