@@ -361,7 +361,7 @@
                         <textarea class="chat-input" id="chat-input" placeholder="Введите ваш запрос ИИ..." oninput="autoResize(this)" onkeydown="handleEnter(event)"></textarea>
                         <button class="btn-send" id="btn-send" onclick="sendMessage()">➤</button>
                     </div>
-                    <div style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px;">Powered by Gemini 2.5 API. Ответы генерируются в реальном времени.</div>
+                    <div style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px;">Powered by METLA AI Core. Ответы генерируются в реальном времени.</div>
                 </div>
             </div>
 
@@ -444,7 +444,7 @@
 
         // --- 2. ЛОГИКА РЕАЛЬНОГО ИИ (GEMINI API) ---
         
-        // ВНИМАНИЕ: Окружение Canvas само подставит ключ в apiKey.
+        // ВНИМАНИЕ: Вставь свой ключ между кавычками ниже!
         const apiKey = "AQ.Ab8RN6J1kU7B22FSdjxKvgVSmDojBIeAXslr8b1FNRZGXSiSdA"; 
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
@@ -561,7 +561,7 @@
             // 3. API Call to Gemini
             try {
                 // Если API ключ пустой (вне песочницы), показываем фейк-ответ для красоты лендинга
-                if (apiKey === "PLACEHOLDER_KEY_FOR_LOCAL_TESTING" || typeof apiKey === 'undefined') {
+                if (apiKey === "ТВОЙ_КЛЮЧ_ЗДЕСЬ" || typeof apiKey === 'undefined') {
                     throw new Error("Local Demo Mode");
                 }
 
