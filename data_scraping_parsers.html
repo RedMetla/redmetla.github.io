@@ -5,19 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Data Scraping & Разработка Парсеров | METLA DIGITAL SYNDICATE</title>
     
-    <!-- SEO База -->
     <meta name="description" content="Разработка парсеров любой сложности. Автоматический сбор данных, мониторинг цен конкурентов, граббинг сайтов. Превращаем хаос интернета в ваши структурированные базы.">
     <meta name="keywords" content="data scraping, парсинг данных, разработка парсеров, сбор данных с сайтов, парсер на python, metla digital syndicate">
     <meta name="author" content="METLA DIGITAL SYNDICATE">
     <link rel="canonical" href="https://redmetla.github.io/RedMet/data_scraping.html" />
 
-    <!-- Open Graph / Соцсети -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Data Scraping | Извлечение любой информации">
     <meta property="og:description" content="Парсеры от Синдиката. Собираем данные конкурентов, формируем базы, автоматизируем рутину.">
     <meta property="og:site_name" content="METLA DIGITAL SYNDICATE">
 
-    <!-- SEO Микроразметка (Service) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -40,7 +37,6 @@
     }
     </script>
 
-    <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
        m[i].l=1*new Date();
@@ -56,8 +52,6 @@
        });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/109526486" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-
     <style>
         /* БАЗОВЫЕ ПЕРЕМЕННЫЕ (Кибер-Матрица & Золото) */
         :root {
@@ -282,17 +276,93 @@
                 100% { transform: scale(0.5) translate(0, 280px); opacity: 0; }
             }
         }
+
+        /* ========================================= */
+        /* БРОНЕБОЙНЫЙ АДАПТИВ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            body, html { 
+                overflow-x: hidden !important; 
+                width: 100% !important; 
+                max-width: 100vw !important;
+            }
+            .presentation-wrapper { 
+                padding: 20px 10px !important; 
+                width: 100% !important; 
+                box-sizing: border-box !important; 
+                overflow: hidden !important;
+            }
+            /* Сжимаем гигантские заголовки */
+            .promo-header h1, h1, h2 { 
+                font-size: clamp(24px, 7vw, 32px) !important; 
+                line-height: 1.2 !important; 
+                word-wrap: break-word !important; 
+                white-space: normal !important;
+                padding: 0 5px !important; 
+                text-align: center !important;
+            }
+            /* Адаптируем текст */
+            .promo-header p, p { 
+                font-size: 14px !important; 
+                line-height: 1.5 !important; 
+                padding: 0 5px !important; 
+                text-align: center !important;
+                word-wrap: break-word !important;
+            }
+            /* Терминал Парсинга */
+            .scraper-terminal { 
+                width: 100% !important; 
+                max-width: 100vw !important; 
+                box-sizing: border-box !important; 
+                margin: 10px 0 !important;
+                border-radius: 16px !important;
+            }
+            .simulation-area {
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+            /* Сетка карточек */
+            .features-grid {
+                grid-template-columns: 1fr !important;
+                padding: 0 10px !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
+            }
+            .feature-card {
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            /* Уменьшаем кнопки и элементы управления */
+            .term-row {
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            .url-input-wrapper, .btn-parse {
+                width: 100% !important;
+                box-sizing: border-box !important;
+                margin: 0 !important;
+            }
+            .url-input {
+                width: calc(100% - 30px) !important;
+                font-size: 0.9rem !important;
+                padding: 10px !important;
+            }
+            .settings-bar {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 10px !important;
+                margin-top: 10px !important;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Живой фон (Радар/Сеть узлов) -->
     <canvas id="radar-canvas"></canvas>
     <div class="vignette"></div>
 
     <main class="presentation-wrapper">
         
-        <!-- Заголовок -->
         <div class="promo-header">
             <h1>Управление Информацией</h1>
             <p>Ручной сбор данных — это ошибка. Мы разрабатываем <b>интеллектуальные парсеры</b>, которые обходят защиты, собирают терабайты данных с сайтов конкурентов и бережно складывают их в ваши базы и таблицы.</p>
@@ -304,7 +374,6 @@
             </div>
         </div>
 
-        <!-- ИНТЕРАКТИВНЫЙ ТЕРМИНАЛ -->
         <div class="scraper-terminal">
             
             <div class="term-control">
@@ -318,7 +387,6 @@
                     </button>
                 </div>
                 
-                <!-- Новая панель настроек (Кликабельно) -->
                 <div class="settings-bar">
                     <label class="cyber-check" onclick="vibrateLight()">
                         <input type="checkbox" checked>
@@ -337,7 +405,6 @@
 
             <div class="simulation-area">
                 
-                <!-- Левая панель: Сайт-донор -->
                 <div class="panel panel-donor" id="donor-panel">
                     <div class="panel-title"><span>📡</span> Сайт-Цель (Хаос)</div>
                     
@@ -348,7 +415,6 @@
                             <div class="mock-logo"></div><div class="mock-nav"></div>
                         </div>
                         
-                        <!-- Товар 1 -->
                         <div class="mock-product" id="prod-1">
                             <div class="mock-img" style="background: #e0e0e0;"></div>
                             <div class="mock-info">
@@ -358,7 +424,6 @@
                             </div>
                         </div>
 
-                        <!-- Товар 2 -->
                         <div class="mock-product" id="prod-2">
                             <div class="mock-img" style="background: #d0d0d0;"></div>
                             <div class="mock-info">
@@ -368,7 +433,6 @@
                             </div>
                         </div>
 
-                        <!-- Товар 3 (Добавлен) -->
                         <div class="mock-product" id="prod-3">
                             <div class="mock-img" style="background: #c0c0c0;"></div>
                             <div class="mock-info">
@@ -378,7 +442,6 @@
                             </div>
                         </div>
 
-                        <!-- Товар 4 (Добавлен) -->
                         <div class="mock-product" id="prod-4">
                             <div class="mock-img" style="background: #b0b0b0;"></div>
                             <div class="mock-info">
@@ -391,17 +454,14 @@
                     </div>
                 </div>
 
-                <!-- Правая панель: База Данных -->
                 <div class="panel panel-db">
                     <div class="panel-title db"><span>🗄️</span> Ваша База (Структура)</div>
                     <div class="status-badge" id="db-status">RECIEVING DATA...</div>
                     
                     <div class="db-container" id="db-json">
-                        <!-- JSON -->
                         <div style="color: rgba(255,255,255,0.2); text-align: center; margin-top: 40%;" id="db-placeholder">Ожидание инициализации парсера...</div>
                     </div>
 
-                    <!-- Кнопка экспорта (Появляется в конце) -->
                     <div class="export-btn-container" id="export-container">
                         <button class="btn-export" onclick="exportJSON()">📥 Скачать .JSON</button>
                     </div>
@@ -410,7 +470,6 @@
             </div>
         </div>
 
-        <!-- Преимущества -->
         <div class="features-grid">
             <div class="feature-card">
                 <div class="f-icon">🕵️‍♂️</div>
