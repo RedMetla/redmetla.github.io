@@ -361,7 +361,7 @@
                         <textarea class="chat-input" id="chat-input" placeholder="Введите ваш запрос ИИ..." oninput="autoResize(this)" onkeydown="handleEnter(event)"></textarea>
                         <button class="btn-send" id="btn-send" onclick="sendMessage()">➤</button>
                     </div>
-                    <div style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px;">Powered by METLA AI Core. Ответы генерируются в реальном времени.</div>
+                    <div style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px;">Powered by METLA AI Core.</div>
                 </div>
             </div>
 
@@ -446,7 +446,7 @@
         
         // ВНИМАНИЕ: Вставь свой ключ между кавычками ниже!
         const apiKey = "AQ.Ab8RN6J1kU7B22FSdjxKvgVSmDojBIeAXslr8b1FNRZGXSiSdA"; 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`;
 
         const chatLog = document.getElementById('chat-log');
         const inputField = document.getElementById('chat-input');
@@ -561,7 +561,7 @@
             // 3. API Call to Gemini
             try {
                 // Если API ключ пустой (вне песочницы), показываем фейк-ответ для красоты лендинга
-                if (apiKey === "ТВОЙ_КЛЮЧ_ЗДЕСЬ" || typeof apiKey === 'undefined') {
+                if (apiKey === "" || typeof apiKey === 'undefined') {
                     throw new Error("Local Demo Mode");
                 }
 
@@ -590,7 +590,7 @@
                 typingIndicator.classList.remove('active');
                 
                 // Fallback (Если API не отвечает или лимиты)
-                let fallbackMsg = "⚠️ [СИСТЕМНОЕ СООБЩЕНИЕ]: Нейросеть работает в изолированном режиме. Чтобы ИИ отвечал на вашем сайте полноценно, необходимо получить бесплатный ключ в Google AI Studio и вставить его в переменную apiKey в коде страницы.";
+                let fallbackMsg = "⚠️ [СИСТЕМНОЕ СООБЩЕНИЕ]: Связь с сервером прервана. Проверьте правильность API-ключа в коде страницы.";
                 
                 await typeAiMessage(fallbackMsg);
             } finally {
