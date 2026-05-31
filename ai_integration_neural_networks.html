@@ -5,19 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Внедрение AI и Нейросетей | METLA DIGITAL SYNDICATE</title>
     
-    <!-- SEO База -->
     <meta name="description" content="Интеграция искусственного интеллекта в ваш бизнес. Разработка умных ботов, автоматизация поддержки, внедрение ChatGPT и нейросетей в бизнес-процессы.">
     <meta name="keywords" content="внедрение ИИ, нейросети для бизнеса, интеграция chatgpt, ai автоматизация, metla digital syndicate, умные боты">
     <meta name="author" content="METLA DIGITAL SYNDICATE">
     <link rel="canonical" href="https://redmetla.github.io/RedMet/ai_integration.html" />
 
-    <!-- Open Graph / Соцсети -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Интеграция ИИ | Делегируйте рутину нейросетям">
     <meta property="og:description" content="Внедряем мощные языковые модели в ваши процессы. Попробуйте наш ИИ прямо на сайте.">
     <meta property="og:site_name" content="METLA DIGITAL SYNDICATE">
 
-    <!-- SEO Микроразметка (Service) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -40,7 +37,6 @@
     }
     </script>
 
-    <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
        m[i].l=1*new Date();
@@ -56,8 +52,6 @@
        });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/109526486" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-
     <style>
         /* БАЗОВЫЕ ПЕРЕМЕННЫЕ (Neural Blue & Deep Purple) */
         :root {
@@ -231,17 +225,76 @@
             .role-desc { display: none; } /* Скрываем описание роли на мобилках */
             .sidebar-title { display: none; }
         }
+
+        /* ========================================= */
+        /* БРОНЕБОЙНЫЙ АДАПТИВ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            body, html { 
+                overflow-x: hidden !important; 
+                width: 100% !important; 
+                max-width: 100vw !important;
+            }
+            .presentation-wrapper { 
+                padding: 20px 10px !important; 
+                width: 100% !important; 
+                box-sizing: border-box !important; 
+                overflow: hidden !important;
+            }
+            /* Сжимаем гигантские заголовки */
+            .promo-header h1, h1, h2 { 
+                font-size: clamp(24px, 7vw, 32px) !important; 
+                line-height: 1.2 !important; 
+                word-wrap: break-word !important; 
+                white-space: normal !important;
+                padding: 0 5px !important; 
+                text-align: center !important;
+            }
+            /* Адаптируем текст */
+            .promo-header p, p { 
+                font-size: 14px !important; 
+                line-height: 1.5 !important; 
+                padding: 0 5px !important; 
+                text-align: center !important;
+                word-wrap: break-word !important;
+            }
+            /* Терминал ИИ */
+            .ai-terminal { 
+                width: 100% !important; 
+                max-width: 100vw !important; 
+                box-sizing: border-box !important; 
+                margin: 10px 0 !important;
+                border-radius: 16px !important;
+            }
+            .chat-area {
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+            .message {
+                max-width: 95% !important;
+                word-wrap: break-word !important;
+            }
+            /* Сетка карточек */
+            .features-grid {
+                grid-template-columns: 1fr !important;
+                padding: 0 10px !important;
+                box-sizing: border-box !important;
+                width: 100% !important;
+            }
+            .feature-card {
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Живой фон (Нейронная сеть) -->
     <canvas id="neural-canvas"></canvas>
     <div class="vignette"></div>
 
     <main class="presentation-wrapper">
         
-        <!-- Заголовок -->
         <div class="promo-header">
             <h1>Нейро-Интеграция</h1>
             <p>Ваши конкуренты до сих пор нанимают операторов и пишут тексты вручную. Мы предлагаем подключить <b>настоящий ИИ</b> к вашим бизнес-процессам. Протестируйте возможности нейросети Синдиката прямо сейчас.</p>
@@ -252,10 +305,8 @@
             </div>
         </div>
 
-        <!-- ИНТЕРАКТИВНЫЙ ТЕРМИНАЛ ИИ (РАБОЧИЙ) -->
         <div class="ai-terminal" id="terminal-container">
             
-            <!-- Боковое меню ролей -->
             <div class="ai-sidebar">
                 <div class="sidebar-title">Выбор Модуля</div>
                 
@@ -284,7 +335,6 @@
                 </button>
             </div>
 
-            <!-- Зона чата -->
             <div class="chat-area">
                 <div class="chat-header">
                     <div class="model-info">
@@ -317,7 +367,6 @@
 
         </div>
 
-        <!-- Преимущества интеграции -->
         <div class="features-grid">
             <div class="feature-card">
                 <div class="f-icon">🧠</div>
