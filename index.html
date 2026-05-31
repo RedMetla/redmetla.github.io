@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>METLA | Студия Премиальной Разработки</title>
-    <meta name="yandex-verification" content="fe4314fa213f87e9" /> <!-- Подтверждение прав для Яндекс.Вебмастер -->
-    <meta name="description" content="Разработка Enterprise IT-решений: Web-приложения, сайты под ключ, умные Telegram-боты и AI-агенты.">
+    <meta name="yandex-verification" content="fe4314fa213f87e9" /> <meta name="description" content="Разработка Enterprise IT-решений: Web-приложения, сайты под ключ, умные Telegram-боты и AI-агенты.">
     <meta property="og:title" content="METLA | Цифровой спецназ для бизнеса">
     <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80">
     <meta name="theme-color" content="#1d1d1f">
@@ -14,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
        m[i].l=1*new Date();
@@ -30,8 +28,6 @@
        });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/109526486" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-    
     <style>
         /* БАЗОВЫЕ ПЕРЕМЕННЫЕ */
         :root {
@@ -490,6 +486,71 @@
             /* Адаптив Security Tooltips для мобильных */
             .sec-item-popup { margin-left: 0; }
         }
+
+        /* ========================================= */
+        /* ПЛАВАЮЩИЙ ВИДЖЕТ: РЕВЕРСИВНЫЕ ЧАСЫ */
+        /* ========================================= */
+        .reverse-clock-widget {
+            position: fixed;
+            bottom: 40px; right: 40px;
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            background: rgba(15, 15, 20, 0.65);
+            border: 1px solid rgba(225, 29, 72, 0.4);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 25px rgba(225, 29, 72, 0.2);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+            cursor: grab;
+            touch-action: none;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s;
+            user-select: none;
+        }
+        .reverse-clock-widget:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            box-shadow: 0 20px 45px rgba(225, 29, 72, 0.6), inset 0 0 35px rgba(225, 29, 72, 0.4);
+        }
+        .clock-face-rev {
+            position: relative; width: 100%; height: 100%; pointer-events: none;
+        }
+        .clock-num-rev {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px; font-weight: 800; font-family: monospace;
+            transform: translate(-50%, -50%);
+            text-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+        .hand-rev {
+            position: absolute; bottom: 50%;
+            transform-origin: bottom center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+            will-change: transform;
+        }
+        .hour-hand-rev { width: 4px; height: 26%; background: #fff; left: calc(50% - 2px); }
+        .min-hand-rev { width: 2px; height: 36%; background: rgba(255,255,255,0.9); left: calc(50% - 1px); }
+        .second-hand-rev { 
+            width: 2px; height: 46%; 
+            background: var(--accent); 
+            left: calc(50% - 1px); 
+            box-shadow: 0 0 12px var(--accent); 
+        }
+        .clock-center-rev {
+            position: absolute; top: 50%; left: 50%;
+            width: 12px; height: 12px;
+            background: #fff; border: 3px solid var(--accent);
+            border-radius: 50%; transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px var(--accent);
+        }
+        @media (max-width: 768px) {
+            .reverse-clock-widget {
+                bottom: 20px; right: 20px;
+                width: 110px; height: 110px;
+            }
+            .clock-num-rev { font-size: 11px; }
+            .hour-hand-rev { width: 3px; left: calc(50% - 1.5px); }
+        }
     </style>
 </head>
 <body>
@@ -530,7 +591,6 @@
             </div>
         </section>
 
-        <!-- ОБНОВЛЕННЫЕ УСЛУГИ С ССЫЛКАМИ -->
         <section id="services">
             <div class="section-header">
                 <h2>Компетенции</h2>
@@ -539,7 +599,6 @@
             
             <div class="bento-grid">
                 
-                <!-- Web & SPA -->
                 <a href="web_development_spa.html" class="apple-card span-8 glow-red">
                     <div class="card-content-wrap">
                         <div class="card-title">Веб-разработка & SPA</div>
@@ -552,7 +611,6 @@
                     </div>
                 </a>
 
-                <!-- БОТЫ -->
                 <a href="telegram_bots_god_level.html" class="apple-card span-4 glow-green">
                     <div class="card-content-wrap" style="max-width: 100%;">
                         <div class="card-title">Telegram-Боты</div>
@@ -561,7 +619,6 @@
                     <i class="fa-solid fa-robot robot-blink" style="font-size: 100px; color: var(--term-green); margin-top: auto; align-self: flex-end; opacity: 0.8; filter: drop-shadow(0 0 20px rgba(50, 215, 75, 0.5));"></i>
                 </a>
 
-                <!-- WebApps (TMA) -->
                 <a href="telegram_web_app.html" class="apple-card span-12 glow-blue">
                     <div class="card-content-wrap">
                         <div class="card-title">Telegram WebApps (TMA)</div>
@@ -582,7 +639,6 @@
                     </div>
                 </a>
 
-                <!-- Парсеры -->
                 <a href="data_scraping_parsers.html" class="apple-card span-6 glow-cyan">
                     <div class="card-content-wrap">
                         <div class="card-title">Data Scraping & Парсеры</div>
@@ -598,7 +654,6 @@
                     </div>
                 </a>
 
-                <!-- AI Нейросети -->
                 <a href="ai_integration_neural_networks.html" class="apple-card span-6 glow-purple">
                     <div class="card-content-wrap">
                         <div class="card-title">Внедрение AI (Нейросети)</div>
@@ -615,7 +670,6 @@
             </div>
         </section>
 
-        <!-- СТЕК ТЕХНОЛОГИЙ -->
         <section class="tech-marquee-section">
             <div class="tech-marquee-wrapper">
                 <div class="tech-marquee">
@@ -628,7 +682,6 @@
                     <div class="tech-item"><i class="fa-brands fa-telegram"></i> TG API</div>
                     <div class="tech-item"><i class="fa-solid fa-bolt"></i> FASTAPI</div>
                     <div class="tech-item"><i class="fa-solid fa-memory"></i> REDIS</div>
-                    <!-- Duplicate for infinite scroll -->
                     <div class="tech-item"><i class="fa-brands fa-python"></i> PYTHON</div>
                     <div class="tech-item"><i class="fa-brands fa-react"></i> REACT.JS</div>
                     <div class="tech-item"><i class="fa-solid fa-database"></i> POSTGRESQL</div>
@@ -642,7 +695,6 @@
             </div>
         </section>
 
-        <!-- ROADMAP -->
         <section id="roadmap" class="roadmap-section">
             <div class="section-header">
                 <h2>Архитектура Разработки</h2>
@@ -691,7 +743,6 @@
             </div>
             
             <div class="pricing-grid">
-                <!-- Пакет 1: БОТЫ -->
                 <div class="pricing-card">
                     <div class="pricing-header">
                         <h3 class="pricing-title">Telegram-Боты</h3>
@@ -713,7 +764,6 @@
                     <a href="#contact" class="btn-pricing btn-pricing-outline">Выбрать тариф</a>
                 </div>
 
-                <!-- Пакет 2: WEB-APP -->
                 <div class="pricing-card featured">
                     <div class="badge-popular">Топ выбор</div>
                     <div class="pricing-header">
@@ -736,7 +786,6 @@
                     <a href="#contact" class="btn-pricing btn-pricing-solid">Обсудить систему</a>
                 </div>
 
-                <!-- Пакет 3: САЙТЫ -->
                 <div class="pricing-card">
                     <div class="pricing-header">
                         <h3 class="pricing-title">Web & Сайты</h3>
@@ -760,7 +809,6 @@
             </div>
         </section>
 
-        <!-- АРХИТЕКТУРА БЕЗОПАСНОСТИ С ИНФО-ПОПАПАМИ -->
         <section id="security" style="padding: 0;">
             <div class="security-section">
                 <div class="security-grid">
@@ -768,28 +816,24 @@
                         <h2 class="sec-title">Архитектура<br><span>Безопасности</span></h2>
                         <p style="font-size: 18px; color: #a1a1a6; line-height: 1.6;">Мы не просто пишем код. Мы строим цифровые крепости. Защита ваших данных и данных ваших клиентов закладывается на этапе проектирования (Security by Design).</p>
                         <ul class="sec-list">
-                            <!-- ИНТЕРАКТИВНЫЙ ПУНКТ 1 -->
                             <li class="sec-item">
                                 <div class="sec-item-header"><i class="fa-solid fa-shield-halved"></i> Защита от OWASP Top 10 уязвимостей</div>
                                 <div class="sec-item-popup">
                                     <p>Предотвращаем SQL-инъекции, XSS-атаки, подделку межсайтовых запросов и утечки конфиденциальных данных на самом глубоком уровне архитектуры кода.</p>
                                 </div>
                             </li>
-                            <!-- ИНТЕРАКТИВНЫЙ ПУНКТ 2 -->
                             <li class="sec-item">
                                 <div class="sec-item-header"><i class="fa-solid fa-server"></i> Изолированные базы данных и Anti-DDoS</div>
                                 <div class="sec-item-popup">
                                     <p>Ваши базы данных полностью изолированы в приватных подсетях. Внешний трафик фильтруется через Cloudflare для защиты от мощнейших DDoS-атак (уровни L3, L4, L7).</p>
                                 </div>
                             </li>
-                            <!-- ИНТЕРАКТИВНЫЙ ПУНКТ 3 -->
                             <li class="sec-item">
                                 <div class="sec-item-header"><i class="fa-solid fa-user-secret"></i> Строгий NDA до первого созвона</div>
                                 <div class="sec-item-popup">
                                     <p>Ваша интеллектуальная собственность и коммерческие идеи надежно защищены юридически. Мы подписываем строгий NDA (соглашение о неразглашении) еще до начала аналитики.</p>
                                 </div>
                             </li>
-                            <!-- ИНТЕРАКТИВНЫЙ ПУНКТ 4 -->
                             <li class="sec-item">
                                 <div class="sec-item-header"><i class="fa-solid fa-key"></i> Хранение токенов в защищенных Vaults</div>
                                 <div class="sec-item-popup">
@@ -810,7 +854,6 @@
             </div>
             
             <div class="demo-grid">
-                <!-- НЕОНОВАЯ ИГРА -->
                 <div class="demo-card arcade-card-wide neon-cyan">
                     <div class="cyber-grid-bg"></div>
                     <div class="tags-container">
@@ -917,7 +960,6 @@
             </div>
         </section>
 
-        <!-- DONATE + СГЕНЕРИРОВАННЫЙ РАБОЧИЙ QR-CODE CLOUDTIPS -->
         <section id="donate" style="padding: 0;">
             <div class="donate-section">
                 <div class="donate-grid">
@@ -930,7 +972,6 @@
                     </div>
                     
                     <div class="qr-wrapper">
-                        <!-- СГЕНЕРИРОВАННЫЙ РАБОЧИЙ QR КОД CLOUDTIPS ЧЕРЕЗ API -->
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pay.cloudtips.ru/p/291b4425" alt="CloudTips QR" class="qr-image" />
                         <p>Сканируй для перевода</p>
                     </div>
@@ -960,7 +1001,10 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНЫЕ ОКНА -->
+    <div class="reverse-clock-widget" id="floatingClock" title="Искривление времени. Перетащи меня!">
+        <div class="clock-face-rev" id="reverseClockFace"></div>
+    </div>
+
     <div id="storeModal" class="modal-overlay">
         <div class="modal-apple" style="background: transparent; box-shadow: none;">
             <button class="modal-close" style="background:#fff; right: 0; top: 0;" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
@@ -1328,6 +1372,113 @@
             if (typeof gameLoopId !== 'undefined') cancelAnimationFrame(gameLoopId); 
             gameLoop(); 
         }
+
+        // --- ДВИЖОК И ПЕРЕТАСКИВАНИЕ ВИДЖЕТА ЧАСОВ (РЕЖИМ МАКСИМУМ) ---
+        function initFloatingClock() {
+            const clock = document.getElementById('floatingClock');
+            const clockFace = document.getElementById('reverseClockFace');
+            if(!clock || !clockFace) return;
+
+            // 1. Отрисовка цифр (против часовой стрелки)
+            function drawNumbers() {
+                clockFace.innerHTML = ''; // Очистка
+                // Добавляем стрелки и центр обратно
+                clockFace.innerHTML = `
+                    <div class="hand-rev hour-hand-rev"></div>
+                    <div class="hand-rev min-hand-rev"></div>
+                    <div class="hand-rev second-hand-rev"></div>
+                    <div class="clock-center-rev"></div>
+                `;
+                
+                const isMobile = window.innerWidth <= 768;
+                const radius = isMobile ? 42 : 60; 
+                const center = isMobile ? 55 : 75;
+
+                for(let i = 1; i <= 12; i++) {
+                    const num = document.createElement('div');
+                    num.className = 'clock-num-rev';
+                    num.innerText = i;
+                    const angleRad = (-(i * 30) - 90) * (Math.PI / 180);
+                    num.style.left = `${center + radius * Math.cos(angleRad)}px`;
+                    num.style.top = `${center + radius * Math.sin(angleRad)}px`;
+                    clockFace.appendChild(num);
+                }
+            }
+            drawNumbers();
+            window.addEventListener('resize', drawNumbers);
+
+            // 2. Механика обратного хода времени
+            function setDate() {
+                const secondHand = document.querySelector('.second-hand-rev');
+                const minsHand = document.querySelector('.min-hand-rev');
+                const hourHand = document.querySelector('.hour-hand-rev');
+                if(!secondHand) return;
+
+                const now = new Date();
+                const seconds = now.getSeconds();
+                const mins = now.getMinutes();
+                const hours = now.getHours();
+
+                secondHand.style.transform = `rotate(${-(seconds / 60) * 360}deg)`;
+                minsHand.style.transform = `rotate(${-((mins + seconds/60) / 60) * 360}deg)`;
+                hourHand.style.transform = `rotate(${-((hours % 12 + mins/60) / 12) * 360}deg)`;
+            }
+            setInterval(setDate, 1000);
+            setDate();
+
+            // 3. Продвинутая логика перетаскивания
+            let isDragging = false;
+            let initialX, initialY;
+
+            function dragStart(e) {
+                if (e.target !== clock && !clock.contains(e.target)) return;
+                isDragging = true;
+                
+                let clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                let clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+                
+                const rect = clock.getBoundingClientRect();
+                initialX = clientX - rect.left;
+                initialY = clientY - rect.top;
+                
+                clock.style.bottom = 'auto';
+                clock.style.right = 'auto';
+                clock.style.transition = 'none'; // Отключаем плавность при драге
+            }
+
+            function drag(e) {
+                if (!isDragging) return;
+                e.preventDefault(); // Блокировка скролла
+                
+                let clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                let clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+                
+                let newX = clientX - initialX;
+                let newY = clientY - initialY;
+
+                newX = Math.max(0, Math.min(newX, window.innerWidth - clock.offsetWidth));
+                newY = Math.max(0, Math.min(newY, window.innerHeight - clock.offsetHeight));
+
+                clock.style.left = `${newX}px`;
+                clock.style.top = `${newY}px`;
+            }
+
+            function dragEnd() {
+                if(!isDragging) return;
+                isDragging = false;
+                clock.style.transition = 'transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s';
+            }
+
+            clock.addEventListener('mousedown', dragStart);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', dragEnd);
+
+            clock.addEventListener('touchstart', dragStart, {passive: false});
+            document.addEventListener('touchmove', drag, {passive: false});
+            document.addEventListener('touchend', dragEnd);
+        }
+        document.addEventListener('DOMContentLoaded', initFloatingClock);
     </script>
 </body>
 </html>
+
