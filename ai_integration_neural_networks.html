@@ -17,29 +17,6 @@
     <meta property="og:description" content="Внедряем мощные языковые модели в ваши процессы. Попробуйте наш ИИ прямо на сайте.">
     <meta property="og:site_name" content="METLA DIGITAL SYNDICATE">
 
-    <!-- SEO Микроразметка (Service) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "AI Integration & Machine Learning",
-      "provider": {
-        "@type": "Organization",
-        "name": "METLA DIGITAL SYNDICATE"
-      },
-      "description": "Разработка и внедрение кастомных решений на базе ИИ: умные ассистенты поддержки, генерация контента, анализ данных.",
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "priceCurrency": "RUB",
-          "price": "Индивидуальный расчет"
-        }
-      }
-    }
-    </script>
-
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -59,7 +36,7 @@
     <!-- /Yandex.Metrika counter -->
 
     <style>
-        /* БАЗОВЫЕ ПЕРЕМЕННЫЕ (Neural Blue & Deep Purple) */
+        /* БАЗОВЫЕ ПЕРЕМЕННЫЕ */
         :root {
             --bg-void: #020205;
             --ai-blue: #2b58ff;
@@ -92,7 +69,6 @@
             width: 100%; max-width: 1400px; padding: 60px 20px; box-sizing: border-box; min-height: 100vh;
         }
 
-        /* ТЕКСТОВЫЙ БЛОК */
         .promo-header { text-align: center; max-width: 900px; margin-bottom: 40px; perspective: 1000px;}
         .promo-header h1 {
             font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; margin-bottom: 20px;
@@ -162,7 +138,7 @@
         .chat-log::-webkit-scrollbar { width: 6px; }
         .chat-log::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
 
-        .message { max-width: 85%; padding: 15px 20px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; animation: slideUp 0.3s ease; position: relative;}
+        .message { max-width: 85%; padding: 15px 20px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; animation: slideUp 0.3s ease; position: relative; word-wrap: break-word;}
         .message.system { align-self: center; background: transparent; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; border: 1px dashed rgba(255,255,255,0.1);}
         .message.user { align-self: flex-end; background: var(--user-msg); border: 1px solid rgba(43, 88, 255, 0.3); border-bottom-right-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .message.ai { align-self: flex-start; background: var(--ai-msg); border: 1px solid rgba(157, 0, 255, 0.3); border-bottom-left-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
@@ -171,14 +147,12 @@
         .message.user .msg-avatar { right: -10px; border-color: var(--ai-blue); color: var(--ai-blue);}
         .message.ai .msg-avatar { left: -10px; border-color: var(--ai-purple); color: var(--ai-purple); box-shadow: 0 0 10px var(--ai-purple);}
 
-        /* Индикатор печати */
         .typing-indicator { display: none; gap: 5px; padding: 15px 20px; align-self: flex-start; background: transparent; }
         .typing-indicator.active { display: flex; }
         .t-dot { width: 8px; height: 8px; background: var(--ai-purple); border-radius: 50%; animation: typeBounce 1.4s infinite ease-in-out both; }
         .t-dot:nth-child(1) { animation-delay: -0.32s; }
         .t-dot:nth-child(2) { animation-delay: -0.16s; }
 
-        /* Ввод пользователя */
         .chat-input-area { padding: 20px; background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.05); }
         .input-wrapper { display: flex; gap: 10px; background: #05050a; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 5px; transition: border-color 0.3s; }
         .input-wrapper:focus-within { border-color: var(--ai-blue); box-shadow: 0 0 15px rgba(43, 88, 255, 0.2); }
@@ -197,7 +171,6 @@
         .btn-send:hover { background: #4068ff; box-shadow: 0 0 15px var(--ai-blue-glow); transform: scale(1.05); }
         .btn-send:disabled { background: #333; color: #666; cursor: not-allowed; box-shadow: none; transform: none; }
 
-        /* КАРТОЧКИ УСЛУГ */
         .features-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
             width: 100%; max-width: 1100px; margin-top: 80px; margin-bottom: 50px;
@@ -214,18 +187,13 @@
         .f-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 15px; color: #fff; }
         .f-desc { font-size: 0.95rem; color: #8b9bb4; line-height: 1.6; }
 
-        /* АНИМАЦИИ */
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0% { opacity: 1; box-shadow: 0 0 10px var(--ai-blue); } 50% { opacity: 0.4; box-shadow: 0 0 2px var(--ai-blue); } 100% { opacity: 1; box-shadow: 0 0 10px var(--ai-blue); } }
         @keyframes typeBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
 
-        /* ========================================= */
-        /* БРОНЕБОЙНЫЙ АДАПТИВ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
-        /* ========================================= */
         @media (max-width: 900px) {
             .presentation-wrapper { padding: 30px 15px; }
             .promo-header h1 { font-size: clamp(2rem, 6vw, 3.5rem); white-space: normal; }
-            
             .ai-terminal { flex-direction: column; height: 750px; }
             .ai-sidebar { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 15px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
             .ai-sidebar::-webkit-scrollbar { display: none; }
@@ -235,39 +203,11 @@
         }
 
         @media (max-width: 768px) {
-            body, html { 
-                overflow-x: hidden !important; 
-                width: 100% !important; 
-                max-width: 100vw !important;
-            }
-            .presentation-wrapper { 
-                padding: 20px 10px !important; 
-                width: 100% !important; 
-                box-sizing: border-box !important; 
-                overflow: hidden !important;
-            }
-            .promo-header h1, h1, h2 { 
-                font-size: clamp(24px, 7vw, 32px) !important; 
-                line-height: 1.2 !important; 
-                word-wrap: break-word !important; 
-                white-space: normal !important;
-                padding: 0 5px !important; 
-                text-align: center !important;
-            }
-            .promo-header p, p { 
-                font-size: 14px !important; 
-                line-height: 1.5 !important; 
-                padding: 0 5px !important; 
-                text-align: center !important;
-                word-wrap: break-word !important;
-            }
-            .ai-terminal { 
-                width: 100% !important; 
-                max-width: 100vw !important; 
-                box-sizing: border-box !important; 
-                margin: 10px 0 !important;
-                border-radius: 16px !important;
-            }
+            body, html { overflow-x: hidden !important; width: 100% !important; max-width: 100vw !important; }
+            .presentation-wrapper { padding: 20px 10px !important; width: 100% !important; box-sizing: border-box !important; overflow: hidden !important; }
+            .promo-header h1, h1, h2 { font-size: clamp(24px, 7vw, 32px) !important; line-height: 1.2 !important; word-wrap: break-word !important; white-space: normal !important; padding: 0 5px !important; text-align: center !important; }
+            .promo-header p, p { font-size: 14px !important; line-height: 1.5 !important; padding: 0 5px !important; text-align: center !important; word-wrap: break-word !important; }
+            .ai-terminal { width: 100% !important; max-width: 100vw !important; box-sizing: border-box !important; margin: 10px 0 !important; border-radius: 16px !important; }
             .chat-area { max-width: 100% !important; overflow: hidden !important; }
             .message { max-width: 95% !important; word-wrap: break-word !important; }
             .features-grid { grid-template-columns: 1fr !important; padding: 0 10px !important; box-sizing: border-box !important; width: 100% !important; }
@@ -281,7 +221,6 @@
     <div class="vignette"></div>
 
     <main class="presentation-wrapper">
-        
         <div class="promo-header">
             <h1>Нейро-Интеграция</h1>
             <p>Ваши конкуренты до сих пор нанимают операторов и пишут тексты вручную. Мы предлагаем подключить <b>настоящий ИИ</b> к вашим бизнес-процессам. Протестируйте возможности нейросети Синдиката прямо сейчас.</p>
@@ -296,7 +235,6 @@
             
             <div class="ai-sidebar">
                 <div class="sidebar-title">Выбор Модуля</div>
-                
                 <button class="role-btn active" onclick="switchRole('consultant', this)">
                     <span class="role-icon">💬</span>
                     <div>
@@ -304,7 +242,6 @@
                         <div class="role-desc" style="font-size:0.75rem; opacity:0.7; margin-top:2px;">Поддержка клиентов 24/7</div>
                     </div>
                 </button>
-
                 <button class="role-btn" onclick="switchRole('analyst', this)">
                     <span class="role-icon">📊</span>
                     <div>
@@ -312,7 +249,6 @@
                         <div class="role-desc" style="font-size:0.75rem; opacity:0.7; margin-top:2px;">Анализ данных и выводы</div>
                     </div>
                 </button>
-
                 <button class="role-btn" onclick="switchRole('copywriter', this)">
                     <span class="role-icon">✍️</span>
                     <div>
@@ -326,13 +262,13 @@
                 <div class="chat-header">
                     <div class="model-info">
                         <div class="pulse-indicator" id="status-pulse"></div>
-                        <span id="current-model-name">Модуль: Консультант (Gemini Core)</span>
+                        <span id="current-model-name">Модуль: Консультант (Metla AI Core)</span>
                     </div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted);">LIVE DEMO</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">SECURE GATEWAY</div>
                 </div>
 
                 <div class="chat-log" id="chat-log">
-                    <div class="message system">Система инициализирована. ИИ готов к работе.</div>
+                    <div class="message system">Система инициализирована. Защищенный шлюз подключен.</div>
                     <div class="message ai">
                         <div class="msg-avatar">AI</div>
                         Приветствую. Я — нейро-ассистент METLA DIGITAL SYNDICATE. В режиме "Консультант" я могу показать, как ИИ отвечает на вопросы ваших клиентов. Напишите мне что-нибудь или задайте вопрос.
@@ -348,10 +284,9 @@
                         <textarea class="chat-input" id="chat-input" placeholder="Введите ваш запрос ИИ..." oninput="autoResize(this)" onkeydown="handleEnter(event)"></textarea>
                         <button class="btn-send" id="btn-send" onclick="sendMessage()">➤</button>
                     </div>
-                    <div style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px;">Powered by METLA AI Core. Ответы генерируются в реальном времени.</div>
+                    <div style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 10px;">Powered by METLA AI Secure Gateway.</div>
                 </div>
             </div>
-
         </div>
 
         <div class="features-grid">
@@ -428,13 +363,10 @@
         }
         drawNeuralNetwork();
 
-        // --- 2. ЛОГИКА РЕАЛЬНОГО ИИ (С ПАТЧЕМ БЕЗОПАСНОСТИ 2.0) ---
+        // --- 2. ЛОГИКА РЕАЛЬНОГО ИИ (БЕССЕРВЕРНЫЙ GAS ПРОКСИ) ---
         
-        // ВНИМАНИЕ: Вставь свой ключ между кавычками ниже!
-        const apiKey = "https://script.google.com/macros/s/AKfycbyJrooDAT60JoDAQE2bMzkrxf0iYqaEv3kM70LRYqyrMjnXa3hUo5SxOY2KrFaBrzSm/exec"; 
-        
-        // Жесткая фиксация стабильной модели
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        // 🔴 ВНИМАНИЕ: СЮДА ВСТАВЛЯЕМ ССЫЛКУ ОТ GOOGLE APPS SCRIPT
+        const apiUrl = "https://script.google.com/macros/s/AKfycbyJrooDAT60JoDAQE2bMzkrxf0iYqaEv3kM70LRYqyrMjnXa3hUo5SxOY2KrFaBrzSm/exec"; 
 
         const chatLog = document.getElementById('chat-log');
         const inputField = document.getElementById('chat-input');
@@ -466,7 +398,7 @@
             if(role === 'copywriter') btnElement.classList.add('purple');
             
             currentRole = role;
-            modelNameDisplay.innerText = `Модуль: ${roleNames[role]} (Gemini Core)`;
+            modelNameDisplay.innerText = `Модуль: ${roleNames[role]} (Metla AI Core)`;
             
             if(navigator.vibrate) navigator.vibrate(15);
 
@@ -540,8 +472,8 @@
             chatLog.scrollTop = chatLog.scrollHeight;
 
             try {
-                if (apiKey === "" || apiKey === "ТВОЙ_КЛЮЧ_ЗДЕСЬ") {
-                    throw new Error("Local Demo Mode");
+                if (apiUrl === "" || apiUrl === "ТВОЯ_ССЫЛКА_ОТ_GAS_СЮДА" || !apiUrl.includes("script.google.com")) {
+                    throw new Error("Не указана ссылка на GAS-сервер. Вставьте URL в переменную apiUrl.");
                 }
 
                 const payload = {
@@ -549,40 +481,34 @@
                     systemInstruction: { parts: [{ text: systemPrompts[currentRole] }] }
                 };
 
+                // ВНИМАНИЕ: Используем text/plain, чтобы обойти блокировку CORS (Preflight Request)
                 const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
 
-                const data = await response.json();
-
-                // Если Google прислал явную ошибку (например, ключ удален)
                 if (!response.ok) {
-                    throw new Error(data.error?.message || 'API Network Error');
+                    throw new Error(`Ошибка сервера GAS. Статус: ${response.status}`);
                 }
 
+                const data = await response.json();
                 let aiResponseText = "";
 
-                // Продвинутый анализ ответа (Патч 2.0)
                 if (data.candidates && data.candidates[0]) {
                     const candidate = data.candidates[0];
-                    
-                    // Проверяем, не сработал ли фильтр безопасности Гугла
                     if (candidate.finishReason === 'SAFETY') {
-                        aiResponseText = "⚠️ [БЛОКИРОВКА СИСТЕМЫ]: Google AI отклонил запрос, так как он нарушает политику безопасности (Safety Guidelines). Пожалуйста, переформулируйте запрос.";
-                    } 
-                    // Если текст успешно сгенерирован
-                    else if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
+                        aiResponseText = "⚠️ [БЛОКИРОВКА СИСТЕМЫ]: Запрос нарушает политику безопасности Google AI.";
+                    } else if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
                         aiResponseText = candidate.content.parts[0].text;
-                    } 
-                    // Неизвестный сбой
-                    else {
-                        aiResponseText = "⚠️ Системный сбой: ИИ вернул пустой ответ без объяснения причин.";
-                        console.log("Raw API Response:", data);
+                    } else {
+                        aiResponseText = "⚠️ Системный сбой: Пустой ответ ИИ.";
                     }
+                } else if (data.error) {
+                    aiResponseText = `⚠️ Ошибка Google API: ${data.error.message}`;
                 } else {
-                    aiResponseText = "⚠️ Системный сбой: Неверный формат ответа от серверов Google.";
+                    aiResponseText = "⚠️ Системный сбой: Неверный формат ответа от GAS.";
+                    console.log("Raw Response:", data);
                 }
                 
                 typingIndicator.classList.remove('active');
@@ -592,8 +518,7 @@
                 console.error("AI Error:", error);
                 typingIndicator.classList.remove('active');
                 
-                // Сюда скрипт падает, если ключ заблокирован, нет интернета или модель удалена
-                let fallbackMsg = `⚠️ [СИСТЕМНОЕ СООБЩЕНИЕ]: Связь с сервером прервана. Ошибка: ${error.message}`;
+                let fallbackMsg = `⚠️ [СИСТЕМНОЕ СООБЩЕНИЕ]: Связь с сервером прервана.\nДетали: ${error.message}`;
                 await typeAiMessage(fallbackMsg);
             } finally {
                 isThinking = false;
