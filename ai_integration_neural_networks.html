@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Внедрение AI и Нейросетей | METLA DIGITAL SYNDICATE</title>
     
+    <!-- SEO База -->
     <meta name="description" content="Интеграция искусственного интеллекта в ваш бизнес. Разработка умных ботов, автоматизация поддержки, внедрение ChatGPT и нейросетей в бизнес-процессы.">
     <meta name="keywords" content="внедрение ИИ, нейросети для бизнеса, интеграция chatgpt, ai автоматизация, metla digital syndicate, умные боты">
     <meta name="author" content="METLA DIGITAL SYNDICATE">
     <link rel="canonical" href="https://redmetla.github.io/RedMet/ai_integration.html" />
 
+    <!-- Open Graph / Соцсети -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Интеграция ИИ | Делегируйте рутину нейросетям">
     <meta property="og:description" content="Внедряем мощные языковые модели в ваши процессы. Попробуйте наш ИИ прямо на сайте.">
     <meta property="og:site_name" content="METLA DIGITAL SYNDICATE">
 
+    <!-- SEO Микроразметка (Service) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -37,6 +40,7 @@
     }
     </script>
 
+    <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
        m[i].l=1*new Date();
@@ -52,6 +56,8 @@
        });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/109526486" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <style>
         /* БАЗОВЫЕ ПЕРЕМЕННЫЕ (Neural Blue & Deep Purple) */
         :root {
@@ -326,7 +332,7 @@
                 </div>
 
                 <div class="chat-log" id="chat-log">
-                    <div class="message system">Система инициализирована. ИИ готов к работе через защищенный шлюз.</div>
+                    <div class="message system">Система инициализирована. ИИ готов к работе.</div>
                     <div class="message ai">
                         <div class="msg-avatar">AI</div>
                         Приветствую. Я — нейро-ассистент METLA DIGITAL SYNDICATE. В режиме "Консультант" я могу показать, как ИИ отвечает на вопросы ваших клиентов. Напишите мне что-нибудь или задайте вопрос.
@@ -422,10 +428,13 @@
         }
         drawNeuralNetwork();
 
-        // --- 2. ЛОГИКА РЕАЛЬНОГО ИИ (ЧЕРЕЗ БЕЗОПАСНЫЙ GAS-ШЛЮЗ) ---
+        // --- 2. ЛОГИКА РЕАЛЬНОГО ИИ (С ПАТЧЕМ БЕЗОПАСНОСТИ 2.0) ---
         
-        // ВНИМАНИЕ: Сюда вставляем ссылку 
-        const apiUrl = "https://script.google.com/macros/s/AKfycbyJrooDAT60JoDAQE2bMzkrxf0iYqaEv3kM70LRYqyrMjnXa3hUo5SxOY2KrFaBrzSm/exec"; 
+        // ВНИМАНИЕ: Вставь свой ключ между кавычками ниже!
+        const apiKey = "https://script.google.com/macros/s/AKfycbyJrooDAT60JoDAQE2bMzkrxf0iYqaEv3kM70LRYqyrMjnXa3hUo5SxOY2KrFaBrzSm/exec"; 
+        
+        // Жесткая фиксация стабильной модели
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
         const chatLog = document.getElementById('chat-log');
         const inputField = document.getElementById('chat-input');
@@ -531,7 +540,7 @@
             chatLog.scrollTop = chatLog.scrollHeight;
 
             try {
-                if (apiUrl === "" || apiUrl === "ТВОЯ_ССЫЛКА_ОТ_GAS_СЮДА") {
+                if (apiKey === "" || apiKey === "ТВОЙ_КЛЮЧ_ЗДЕСЬ") {
                     throw new Error("Local Demo Mode");
                 }
 
@@ -540,17 +549,41 @@
                     systemInstruction: { parts: [{ text: systemPrompts[currentRole] }] }
                 };
 
-                // Запрос к GAS (text/plain обходит блокировки CORS)
                 const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
 
-                if (!response.ok) throw new Error('API Network Error');
-
                 const data = await response.json();
-                const aiResponseText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Ошибка обработки данных модулем.";
+
+                // Если Google прислал явную ошибку (например, ключ удален)
+                if (!response.ok) {
+                    throw new Error(data.error?.message || 'API Network Error');
+                }
+
+                let aiResponseText = "";
+
+                // Продвинутый анализ ответа (Патч 2.0)
+                if (data.candidates && data.candidates[0]) {
+                    const candidate = data.candidates[0];
+                    
+                    // Проверяем, не сработал ли фильтр безопасности Гугла
+                    if (candidate.finishReason === 'SAFETY') {
+                        aiResponseText = "⚠️ [БЛОКИРОВКА СИСТЕМЫ]: Google AI отклонил запрос, так как он нарушает политику безопасности (Safety Guidelines). Пожалуйста, переформулируйте запрос.";
+                    } 
+                    // Если текст успешно сгенерирован
+                    else if (candidate.content && candidate.content.parts && candidate.content.parts.length > 0) {
+                        aiResponseText = candidate.content.parts[0].text;
+                    } 
+                    // Неизвестный сбой
+                    else {
+                        aiResponseText = "⚠️ Системный сбой: ИИ вернул пустой ответ без объяснения причин.";
+                        console.log("Raw API Response:", data);
+                    }
+                } else {
+                    aiResponseText = "⚠️ Системный сбой: Неверный формат ответа от серверов Google.";
+                }
                 
                 typingIndicator.classList.remove('active');
                 await typeAiMessage(aiResponseText);
@@ -559,8 +592,8 @@
                 console.error("AI Error:", error);
                 typingIndicator.classList.remove('active');
                 
-                let fallbackMsg = "⚠️ [СИСТЕМНОЕ СООБЩЕНИЕ]: Связь с сервером прервана. Не забудьте вставить ссылку от вашего GAS-сервера в код страницы.";
-                
+                // Сюда скрипт падает, если ключ заблокирован, нет интернета или модель удалена
+                let fallbackMsg = `⚠️ [СИСТЕМНОЕ СООБЩЕНИЕ]: Связь с сервером прервана. Ошибка: ${error.message}`;
                 await typeAiMessage(fallbackMsg);
             } finally {
                 isThinking = false;
