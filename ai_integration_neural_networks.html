@@ -33,7 +33,6 @@
        });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/109526486" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
 
     <style>
         /* БАЗОВЫЕ ПЕРЕМЕННЫЕ */
@@ -201,18 +200,6 @@
             .role-desc { display: none; }
             .sidebar-title { display: none; }
         }
-
-        @media (max-width: 768px) {
-            body, html { overflow-x: hidden !important; width: 100% !important; max-width: 100vw !important; }
-            .presentation-wrapper { padding: 20px 10px !important; width: 100% !important; box-sizing: border-box !important; overflow: hidden !important; }
-            .promo-header h1, h1, h2 { font-size: clamp(24px, 7vw, 32px) !important; line-height: 1.2 !important; word-wrap: break-word !important; white-space: normal !important; padding: 0 5px !important; text-align: center !important; }
-            .promo-header p, p { font-size: 14px !important; line-height: 1.5 !important; padding: 0 5px !important; text-align: center !important; word-wrap: break-word !important; }
-            .ai-terminal { width: 100% !important; max-width: 100vw !important; box-sizing: border-box !important; margin: 10px 0 !important; border-radius: 16px !important; }
-            .chat-area { max-width: 100% !important; overflow: hidden !important; }
-            .message { max-width: 95% !important; word-wrap: break-word !important; }
-            .features-grid { grid-template-columns: 1fr !important; padding: 0 10px !important; box-sizing: border-box !important; width: 100% !important; }
-            .feature-card { width: 100% !important; box-sizing: border-box !important; }
-        }
     </style>
 </head>
 <body>
@@ -366,7 +353,7 @@
         // --- 2. ЛОГИКА РЕАЛЬНОГО ИИ (БЕССЕРВЕРНЫЙ GAS ПРОКСИ) ---
         
         // 🔴 ВНИМАНИЕ: СЮДА ВСТАВЛЯЕМ ССЫЛКУ ОТ GOOGLE APPS SCRIPT
-        const apiUrl = "https://script.google.com/macros/s/AKfycbyJrooDAT60JoDAQE2bMzkrxf0iYqaEv3kM70LRYqyrMjnXa3hUo5SxOY2KrFaBrzSm/exec"; 
+        const apiUrl = "https://script.google.com/macros/s/AKfycbyQMQOk6YsfgbRfk6CTYk7Kxf3p-HhFawFGKHQ6GYzL5lY24vfou7KNahzGyBUJ7YAGtQ/exec"; 
 
         const chatLog = document.getElementById('chat-log');
         const inputField = document.getElementById('chat-input');
@@ -473,7 +460,7 @@
 
             try {
                 if (apiUrl === "" || apiUrl === "ТВОЯ_ССЫЛКА_ОТ_GAS_СЮДА" || !apiUrl.includes("script.google.com")) {
-                    throw new Error("Не указана ссылка на GAS-сервер. Вставьте URL в переменную apiUrl.");
+                    throw new Error("Не указана ссылка на GAS-сервер. Вставьте URL в переменную apiUrl (строка 335).");
                 }
 
                 const payload = {
