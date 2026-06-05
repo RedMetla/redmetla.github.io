@@ -6,7 +6,8 @@
     
     <title>METLA | Студия Премиальной Разработки</title>
     
-    <!-- Правильный Favicon для Яндекс и Google -->
+    <!-- Правильный Favicon для Яндекс и Google + SVG fallback (Метла) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧹</text></svg>">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
     
@@ -127,16 +128,18 @@
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
             position: relative; overflow: hidden; 
             display: flex; align-items: flex-start; justify-content: space-between;
-            text-decoration: none;
+            text-decoration: none; /* Убираем подчеркивание ссылок */
             color: inherit;
         }
         
+        /* Привязка анимаций дыхания к карточкам услуг */
         .apple-card.glow-red { animation: breatheRed 3s infinite alternate; }
         .apple-card.glow-green { animation: breatheGreen 3.5s infinite alternate; }
         .apple-card.glow-blue { animation: breatheBlue 4s infinite alternate; }
         .apple-card.glow-purple { animation: breathePurple 3.8s infinite alternate; }
         .apple-card.glow-cyan { animation: breatheCyan 3.2s infinite alternate; }
 
+        /* Отделяем hover эффект (только подъем), чтобы не сбивать анимацию дыхания */
         .apple-card:hover { transform: translateY(-5px); }
 
         .card-content-wrap { position: relative; z-index: 2; max-width: 60%; }
@@ -153,7 +156,7 @@
         .abstract-art { position: absolute; right: -20px; bottom: -20px; width: 280px; height: 280px; z-index: 1; transition: var(--transition-apple); border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: visible; }
         
         /* АНИМАЦИЯ: WEB/SPA */
-        .art-web { background: #0b0f19; overflow: hidden; }
+        .art-web { background: #0b0f19; overflow: hidden; } /* Фон скрывает сетку, но сферы внутри */
         .art-web-grid { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: repeating-linear-gradient(transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px), repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px); animation: moveGrid 20s linear infinite; }
         @keyframes moveGrid { 0% { transform: translate(0, 0); } 100% { transform: translate(-30px, -30px); } }
         .art-web-orb { position: absolute; border-radius: 50%; filter: blur(20px); animation: orbFloat 6s ease-in-out infinite alternate; }
@@ -169,7 +172,7 @@
         .tma-box.accent { background: rgba(56, 189, 248, 0.4); height: 50px; }
         @keyframes screenScroll { 0% { transform: translateY(0); } 100% { transform: translateY(-60px); } }
 
-        /* АНИМАЦИЯ: AI */
+        /* АНИМАЦИЯ: AI (Идеальное центрирование без обрезки) */
         .art-ai-orbit { position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; margin-top: -60px; margin-left: -60px; display: flex; justify-content: center; align-items: flex-start; z-index: 2; animation: aiSpin 8s linear infinite; }
         .art-ai-core { width: 30px; height: 30px; background: #c882ff; border-radius: 50%; box-shadow: 0 0 30px #c882ff; animation: aiPulse 2s infinite alternate; transform: translateY(-15px); }
         .art-ai-ring { position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; margin-top: -60px; margin-left: -60px; border: 1px dashed rgba(200, 130, 255, 0.5); border-radius: 50%; animation: aiSpin 15s linear infinite reverse; }
@@ -177,7 +180,7 @@
         @keyframes aiPulse { 0% { transform: scale(0.9) translateY(-15px); opacity: 0.8; } 100% { transform: scale(1.1) translateY(-15px); opacity: 1; box-shadow: 0 0 40px #c882ff; } }
         @keyframes aiSpin { 100% { transform: rotate(360deg); } }
 
-        /* АНИМАЦИЯ: Парсеры */
+        /* АНИМАЦИЯ: Парсеры (Внутри контейнера) */
         .art-data-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-evenly; overflow: hidden; border-radius: 20px; }
         .data-line { width: 100%; height: 1px; background: rgba(50, 215, 75, 0.1); position: relative; }
         .data-dot { width: 6px; height: 6px; background: #32d74b; box-shadow: 0 0 10px #32d74b; border-radius: 50%; position: absolute; top: -2.5px; animation: dataScan 2s linear infinite; }
@@ -186,7 +189,7 @@
         .data-line:nth-child(4) .data-dot { animation-duration: 1.8s; animation-delay: 0.2s; }
         @keyframes dataScan { 0% { left: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
 
-        /* АНИМАЦИЯ БОТА */
+        /* АНИМАЦИЯ БОТА (Мигание) */
         .robot-blink { animation: blinkAnim 4s infinite; transform-origin: center; }
         @keyframes blinkAnim { 0%, 46%, 48%, 50%, 100% { transform: scaleY(1); } 47%, 49% { transform: scaleY(0.1); } }
 
@@ -199,7 +202,7 @@
         .tech-item:hover i { color: var(--accent); filter: drop-shadow(0 0 15px var(--accent)); }
         @keyframes scrollMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-        /* БЛОК: ROADMAP */
+        /* БЛОК: ROADMAP (РАСШИРЕННЫЙ) */
         .roadmap-section { padding: 120px 0; position: relative; }
         .timeline { position: relative; width: 100%; max-width: 100%; margin: 0 auto; padding: 40px 0; }
         .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: rgba(225, 29, 72, 0.2); transform: translateX(-50%); border-radius: 2px; }
@@ -248,25 +251,27 @@
         .btn-pricing-solid { background: var(--accent); border: 2px solid var(--accent); color: #fff; box-shadow: var(--shadow-glow); }
         .btn-pricing-solid:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 
-        /* АРХИТЕКТУРА БЕЗОПАСНОСТИ */
+        /* АРХИТЕКТУРА БЕЗОПАСНОСТИ (С ТУЛТИПАМИ) */
         .security-section { background: #111113; color: #fff; padding: 100px 80px; border-radius: 40px; margin: 60px 0; position: relative; overflow: visible; border: 1px solid rgba(50, 215, 75, 0.1); animation: breatheGreen 4s infinite alternate; }
         .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; z-index: 2; position: relative; }
         .sec-title { font-size: 42px; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; color: #fff; }
         .sec-title span { color: var(--accent); }
         .sec-list { list-style: none; margin-top: 30px; }
         
+        /* Интерактивные пункты списка */
         .sec-item { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 20px; cursor: pointer; position: relative; }
         .sec-item-header { display: flex; align-items: center; gap: 15px; font-size: 18px; color: #a1a1a6; transition: 0.3s; }
         .sec-item:hover .sec-item-header { color: #fff; transform: translateX(10px); }
         .sec-item-header i { color: var(--term-green); font-size: 24px; }
         
+        /* Glassmorphism Popup */
         .sec-item-popup { max-height: 0; opacity: 0; overflow: hidden; background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-radius: 16px; border: 1px solid transparent; margin-left: 40px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
         .sec-item:hover .sec-item-popup { max-height: 200px; opacity: 1; margin-top: 15px; padding: 20px; border-color: rgba(50, 215, 75, 0.3); animation: breatheGreen 3.5s infinite alternate; }
         .sec-item-popup p { font-size: 14px; color: #cbd5e1; margin: 0; line-height: 1.6; }
 
         .cyber-shield { width: 100%; height: 300px; background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cpath fill="none" stroke="%2332d74b" stroke-width="2" d="M50 5 L90 25 L90 60 C90 80 50 95 50 95 C50 95 10 80 10 60 L10 25 Z" opacity="0.2"/%3E%3Cpath fill="none" stroke="%23e11d48" stroke-width="1" d="M50 15 L80 30 L80 55 C80 70 50 85 50 85 C50 85 20 70 20 55 L20 30 Z" opacity="0.5"/%3E%3C/svg%3E') no-repeat center; background-size: contain; animation: pulseShield 4s infinite alternate; }
 
-        /* ВИЗУАЛИЗАЦИЯ & ДЕМО */
+        /* ВИЗУАЛИЗАЦИЯ & ДЕМО (НЕОНОВЫЕ ПЛИТКИ) */
         .demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
         .demo-card { background: #1d1d1f; color: #fff; border-radius: var(--radius-large); padding: 50px; position: relative; overflow: hidden; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border: 1px solid #333; z-index: 1; }
         
@@ -312,7 +317,7 @@
 
         .arcade-card-wide { grid-column: 1 / -1; }
 
-        /* БАЗА ЗНАНИЙ (FAQ) */
+        /* БАЗА ЗНАНИЙ (FAQ ACCORDION) */
         .faq-container { max-width: 800px; margin: 0 auto; }
         .faq-item { background: var(--bg-card); backdrop-filter: blur(20px); border-radius: 20px; margin-bottom: 15px; border: 1px solid rgba(0,0,0,0.05); overflow: hidden; transition: 0.3s; }
         .faq-item:hover { box-shadow: var(--shadow-soft); transform: translateX(5px); }
@@ -329,7 +334,7 @@
         .apple-input { width: 100%; padding: 22px; border: 1px solid rgba(0,0,0,0.1); border-radius: 20px; font-family: inherit; font-size: 17px; background: rgba(255,255,255,0.9); transition: var(--transition-apple); margin-bottom: 15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
         .apple-input:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.1), inset 0 2px 5px rgba(0,0,0,0); }
 
-        /* DONATE */
+        /* DONATE + QR-CODE */
         .donate-section { background: var(--bg-card); backdrop-filter: blur(20px); padding: 40px; border-radius: 24px; margin: 40px auto; max-width: 800px; border: 1px solid rgba(255,255,255,0.5); text-align: left; animation: breatheRed 3s infinite alternate; }
         .donate-grid { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
         .donate-info { flex: 1; }
@@ -382,16 +387,17 @@
         .parser-table th, .parser-table td { border: 1px solid #334155; padding: 8px; text-align: left; }
         .parser-table th { background: #1e293b; color: #94a3b8; }
 
-        /* AI Модалка (ИЗМЕНЕНО ДЛЯ РЕАЛЬНОГО ИИ) */
+        /* AI Модалка */
         .ai-bg { background: #ffffff !important; }
-        .ai-chat-box { background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; height: 400px; display: flex; flex-direction: column; }
-        .ai-messages { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth;}
+        .ai-chat-box { background: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0; height: 350px; display: flex; flex-direction: column; }
+        .ai-messages { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .ai-msg { padding: 12px 18px; border-radius: 16px; font-size: 15px; max-width: 85%; line-height: 1.5; }
         .ai-user { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
         .ai-bot { background: #fff; border: 1px solid #e2e8f0; color: #1e293b; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         .typing-indicator { display: inline-flex; gap: 4px; align-items: center; padding: 5px 0; }
         .dot { width: 6px; height: 6px; background: #cbd5e1; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
         .dot:nth-child(1) { animation-delay: -0.32s; } .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
 
         /* Терминал Модалка */
         .fallout-bg { background: #0a0a0a !important; border: 2px solid var(--term-green); box-shadow: 0 0 30px rgba(50,215,75,0.15); }
@@ -423,22 +429,28 @@
         .btn-neon { background: transparent; color: #0ff; border: 2px solid #0ff; padding: 15px; width: 100%; border-radius: 12px; font-family: monospace; font-size: 18px; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; margin-top: 20px; box-shadow: inset 0 0 10px rgba(0,255,255,0.2), 0 0 10px rgba(0,255,255,0.2); }
         .btn-neon:hover { background: #0ff; color: #000; box-shadow: 0 0 20px #0ff; }
 
-        /* ИДЕАЛЬНЫЙ АДАПТИВ */
+        /* ИДЕАЛЬНЫЙ АДАПТИВ (Исправления багов на мобильных) */
         @media (max-width: 992px) {
             .span-8, .span-4, .span-6 { grid-column: span 12; }
+            
             .apple-card { flex-direction: column; align-items: center; text-align: center; }
             .card-content-wrap { max-width: 100% !important; margin-bottom: 30px; }
             .span-12 .card-content-wrap { max-width: 100%; }
+            
             .art-container, .abstract-art { position: relative !important; right: auto !important; bottom: auto !important; width: 100% !important; height: 200px !important; margin-top: 20px; }
             .art-tma-phone { height: 180px; border-bottom: 4px solid #334155; border-radius: 20px; }
+            
             .demo-grid, .contact-box, .security-grid, .pricing-grid { grid-template-columns: 1fr; }
             .contact-box { padding: 40px 20px; }
             .security-section { padding: 60px 30px; } 
             .pricing-card.featured { transform: scale(1); }
             .pricing-card.featured:hover { transform: translateY(-10px); }
+            
             .donate-grid { flex-direction: column; text-align: center; gap: 20px; }
             .donate-info p { margin-left: auto; margin-right: auto; }
             .qr-wrapper { display: none; } 
+            
+            /* Таймлайн Адаптив для Планшетов */
             .timeline::before { left: 30px; }
             .timeline-item { width: 100%; padding: 0 0 40px 60px !important; }
             .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { left: 0; text-align: left; }
@@ -448,9 +460,12 @@
         
         @media (max-width: 768px) {
             .hero { padding: 80px 0 60px; } 
+            /* ИДЕАЛЬНАЯ ТИПОГРАФИКА ДЛЯ ТЕЛЕФОНОВ (2 строки всегда) */
             .hero h1 { font-size: clamp(28px, 8vw, 40px); letter-spacing: -1px; line-height: 1.1; padding: 0 10px; }
+            
             .btn-apple.desktop-only { display: none; }
             .mobile-menu-btn { display: block; font-size: 28px; cursor: pointer; color: var(--text-main); }
+            
             .nav-links {
                 position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
                 background: rgba(245, 245, 247, 0.98); backdrop-filter: blur(20px);
@@ -461,35 +476,84 @@
             .nav-links.active { right: 0; }
             .nav-links a { font-size: 20px; width: 100%; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 15px; color: var(--text-main); }
             .close-menu-btn { display: block !important; position: absolute; top: 20px; right: 25px; font-size: 40px; background: none; border: none; color: var(--text-main); cursor: pointer; z-index: 1002; }
+
             .legal-bottom { flex-direction: column; gap: 10px; text-align: center; }
             .footer-content { flex-direction: column; gap: 30px; }
+            
+            /* Таймлайн Адаптив Мобайл */
             .timeline::before { left: 20px; }
             .timeline-item { padding: 0 0 40px 45px !important; }
             .timeline-item:nth-child(even) .timeline-dot, .timeline-item:nth-child(odd) .timeline-dot { left: 12px; }
             .timeline-content { padding: 25px 20px; }
+
+            /* Адаптив бегущей строки */
             .tech-marquee-section { margin: 0 10px; border-radius: 20px; padding: 30px 0; }
+            
+            /* Адаптив Security Tooltips для мобильных */
             .sec-item-popup { margin-left: 0; }
         }
 
-        /* РЕВЕРСИВНЫЕ ЧАСЫ */
+        /* ========================================= */
+        /* ПЛАВАЮЩИЙ ВИДЖЕТ: РЕВЕРСИВНЫЕ ЧАСЫ */
+        /* ========================================= */
         .reverse-clock-widget {
-            position: fixed; bottom: 40px; right: 40px; width: 150px; height: 150px; border-radius: 50%;
-            background: rgba(15, 15, 20, 0.65); border: 1px solid rgba(225, 29, 72, 0.4);
+            position: fixed;
+            bottom: 40px; right: 40px;
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            background: rgba(15, 15, 20, 0.65);
+            border: 1px solid rgba(225, 29, 72, 0.4);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 25px rgba(225, 29, 72, 0.2);
-            display: flex; justify-content: center; align-items: center; z-index: 9999;
-            cursor: grab; touch-action: none; transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s; user-select: none;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+            cursor: grab;
+            touch-action: none;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s;
+            user-select: none;
         }
-        .reverse-clock-widget:active { cursor: grabbing; transform: scale(1.05); box-shadow: 0 20px 45px rgba(225, 29, 72, 0.6), inset 0 0 35px rgba(225, 29, 72, 0.4); }
-        .clock-face-rev { position: relative; width: 100%; height: 100%; pointer-events: none; }
-        .clock-num-rev { position: absolute; color: rgba(255, 255, 255, 0.85); font-size: 13px; font-weight: 800; font-family: monospace; transform: translate(-50%, -50%); text-shadow: 0 0 8px rgba(255,255,255,0.5); }
-        .hand-rev { position: absolute; bottom: 50%; transform-origin: bottom center; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.6); will-change: transform; }
+        .reverse-clock-widget:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            box-shadow: 0 20px 45px rgba(225, 29, 72, 0.6), inset 0 0 35px rgba(225, 29, 72, 0.4);
+        }
+        .clock-face-rev {
+            position: relative; width: 100%; height: 100%; pointer-events: none;
+        }
+        .clock-num-rev {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px; font-weight: 800; font-family: monospace;
+            transform: translate(-50%, -50%);
+            text-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+        .hand-rev {
+            position: absolute; bottom: 50%;
+            transform-origin: bottom center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+            will-change: transform;
+        }
         .hour-hand-rev { width: 4px; height: 26%; background: #fff; left: calc(50% - 2px); }
         .min-hand-rev { width: 2px; height: 36%; background: rgba(255,255,255,0.9); left: calc(50% - 1px); }
-        .second-hand-rev { width: 2px; height: 46%; background: var(--accent); left: calc(50% - 1px); box-shadow: 0 0 12px var(--accent); }
-        .clock-center-rev { position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; background: #fff; border: 3px solid var(--accent); border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 15px var(--accent); }
+        .second-hand-rev { 
+            width: 2px; height: 46%; 
+            background: var(--accent); 
+            left: calc(50% - 1px); 
+            box-shadow: 0 0 12px var(--accent); 
+        }
+        .clock-center-rev {
+            position: absolute; top: 50%; left: 50%;
+            width: 12px; height: 12px;
+            background: #fff; border: 3px solid var(--accent);
+            border-radius: 50%; transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px var(--accent);
+        }
         @media (max-width: 768px) {
-            .reverse-clock-widget { bottom: 20px; right: 20px; width: 110px; height: 110px; }
+            .reverse-clock-widget {
+                bottom: 20px; right: 20px;
+                width: 110px; height: 110px;
+            }
             .clock-num-rev { font-size: 11px; }
             .hour-hand-rev { width: 3px; left: calc(50% - 1.5px); }
         }
@@ -968,18 +1032,17 @@
         </div>
     </div>
 
-    <!-- ИЗМЕНЕНО: МОДАЛКА AI (ТЕПЕРЬ РЕАЛЬНЫЙ ЧАТ) -->
     <div id="aiModal" class="modal-overlay">
         <div class="modal-apple ai-bg">
             <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
-            <h3 style="font-size: 20px; margin-bottom: 20px;"><i class="fa-solid fa-brain" style="color:var(--accent);"></i> METLA AI Core (Live)</h3>
+            <h3 style="font-size: 20px; margin-bottom: 20px;"><i class="fa-solid fa-brain" style="color:var(--accent);"></i> METLA AI Core</h3>
             <div class="ai-chat-box">
                 <div class="ai-messages" id="aiMessages">
-                    <div class="ai-msg ai-bot">Здравствуйте! Я интегрированный AI-агент Синдиката. Задайте мне любой технический или аналитический вопрос.</div>
+                    <div class="ai-msg ai-bot">Здравствуйте! Я интегрированный AI-агент. Я могу проанализировать ваш договор или написать код. Что вас интересует?</div>
                 </div>
                 <div style="padding: 15px; border-top: 1px solid #e2e8f0; display: flex; gap: 10px;">
-                    <input type="text" id="aiModalInput" class="apple-input" style="margin:0; padding: 10px; border-radius: 8px; flex: 1; font-size: 14px;" placeholder="Введите ваш запрос..." onkeypress="if(event.key === 'Enter') sendAiModalMsg()">
-                    <button class="btn-apple" style="padding: 10px 15px; border-radius: 8px;" onclick="sendAiModalMsg()"><i class="fa-solid fa-paper-plane"></i></button>
+                    <button class="btn-apple" style="flex: 1; padding: 10px; font-size:12px; background: #f1f5f9; color: #0f172a;" onclick="simulateAi('Напиши скрипт парсера на Python')">Скрипт на Python</button>
+                    <button class="btn-apple" style="flex: 1; padding: 10px; font-size:12px; background: #f1f5f9; color: #0f172a;" onclick="simulateAi('Проанализируй рынок IT')">Анализ рынка</button>
                 </div>
             </div>
         </div>
@@ -1125,7 +1188,7 @@
             }
         });
 
-        // МОДАЛЬНЫЕ ОКНА ОБЩИЕ
+        // МОДАЛЬНЫЕ ОКНА
         function openModal(id) {
             const modal = document.getElementById(id);
             modal.style.display = 'flex';
@@ -1139,68 +1202,23 @@
             if (typeof gameLoopId !== 'undefined') cancelAnimationFrame(gameLoopId);
         }
 
-        // --- ЛОГИКА РЕАЛЬНОГО ИИ В МОДАЛКЕ (БЕЗ GAS) ---
         function openAiModal() {
             openModal('aiModal');
-            document.getElementById('aiMessages').innerHTML = '<div class="ai-msg ai-bot">Здравствуйте! Я интегрированный AI-агент Синдиката. Задайте мне любой технический или аналитический вопрос.</div>';
+            document.getElementById('aiMessages').innerHTML = '<div class="ai-msg ai-bot">Здравствуйте! Я интегрированный AI-агент. Я могу проанализировать ваш договор или написать код. Что вас интересует?</div>';
         }
-        
-        async function sendAiModalMsg(presetText = null) {
-            const input = document.getElementById('aiModalInput');
-            const text = presetText || input.value.trim();
-            if (!text) return;
-
+        function simulateAi(text) {
             const chat = document.getElementById('aiMessages');
-            
-            // Печатаем вопрос юзера
             chat.innerHTML += `<div class="ai-msg ai-user">${text}</div>`;
-            if(input) input.value = '';
             chat.scrollTop = chat.scrollHeight;
-
-            // Включаем индикатор загрузки
             const typingId = 'typing_' + Date.now();
             chat.innerHTML += `<div class="ai-msg ai-bot" id="${typingId}"><div class="typing-indicator"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>`;
             chat.scrollTop = chat.scrollHeight;
-
-            try {
-                // 🔴 СЮДА ВСТАВЛЯЕМ КЛЮЧИ
-                const keyPart1 = "ВСТАВЬ_СЮДА_ПЕРВУЮ_ПОЛОВИНУ"; // Например: "AIzaSy..."
-                const keyPart2 = "ВСТАВЬ_СЮДА_ВТОРУЮ_ПОЛОВИНУ"; // ...остальная часть
-
-                if(keyPart1.includes("ВСТАВЬ")) {
-                    throw new Error("Ключ не настроен");
-                }
-
-                const apiKey = keyPart1 + keyPart2;
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: text }] }],
-                        systemInstruction: { parts: [{ text: "Ты ИИ-ассистент студии METLA DIGITAL SYNDICATE. Отвечай кратко, профессионально и по делу." }] }
-                    })
-                });
-
-                if(!response.ok) throw new Error("API Error");
-                const data = await response.json();
-                
-                const botReply = data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>');
-
+            setTimeout(() => {
                 document.getElementById(typingId).remove();
-                chat.innerHTML += `<div class="ai-msg ai-bot">${botReply}</div>`;
-
-            } catch (e) {
-                document.getElementById(typingId).remove();
-                chat.innerHTML += `<div class="ai-msg ai-bot" style="color: red; font-size: 13px;">[СИСТЕМНЫЙ СБОЙ]: Невозможно связаться с сервером. Вставьте API-ключ в код страницы (Split Method).</div>`;
-            }
-            chat.scrollTop = chat.scrollHeight;
+                chat.innerHTML += `<div class="ai-msg ai-bot">Генерация ответа: Выполнено.<br><br>Стек для вашей задачи подобран. Архитектура готова к развертыванию. Для реальной работы свяжитесь с инженерами METLA.</div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 2000);
         }
-
-        // Оставляем совместимость со старой функцией, если кто-то нажмет старые кнопки (если бы они были)
-        window.simulateAi = function(text) { sendAiModalMsg(text); };
-
         function openParserModal() {
             openModal('parserModal');
             const console = document.getElementById('parserConsole');
@@ -1253,76 +1271,98 @@
             const lastSubmit = localStorage.getItem('metla_last_submit');
             const now = Date.now();
             if (lastSubmit && now - lastSubmit < 60000) { alert('🛡 Защита от спама: Подождите минуту.'); return; }
-            const webAppUrl = 'https://script.google.com/macros/s/AKfycbzK9uEOkVTOoK_fVTrU4MeXkW7MOPUBQgvaiE6xurbt5Gbx-X_uKNXmbnspVvrGEsaFVQ/exec; 
+            
+            // НОВАЯ ССЫЛКА НА GAS ПРОКСИ
+            const webAppUrl = 'https://script.google.com/macros/s/AKfycbzK9uEOkVTOoK_fVTrU4MeXkW7MOPUBQgvaiE6xurbt5Gbx-X_uKNXmbnspVvrGEsaFVQ/exec'; 
+            
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerText;
             submitBtn.innerText = 'Шифрование...';
             submitBtn.disabled = true;
-            const data = { name: sanitizeInput(document.getElementById('userName').value), contact: sanitizeInput(document.getElementById('userContact').value), task: sanitizeInput(document.getElementById('userTask').value) };
-            fetch(webAppUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) })
+            
+            const data = { 
+                name: sanitizeInput(document.getElementById('userName').value), 
+                contact: sanitizeInput(document.getElementById('userContact').value), 
+                task: sanitizeInput(document.getElementById('userTask').value) 
+            };
+            
+            fetch(webAppUrl, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+                body: JSON.stringify(data) 
+            })
             .then(r => r.json()).then(res => {
-                if (res.status === 'success') { alert('Заявка успешно зашифрована и доставлена в Штаб!'); localStorage.setItem('metla_last_submit', now); this.reset(); } else { alert('Ошибка сервера.'); }
+                if (res.status === 'success') { 
+                    alert('Заявка успешно зашифрована и доставлена в Штаб!'); 
+                    localStorage.setItem('metla_last_submit', now); 
+                    this.reset(); 
+                } else { 
+                    alert('Ошибка сервера.'); 
+                }
             }).catch(() => alert('Ошибка соединения.'))
-            .finally(() => { submitBtn.innerText = originalText; submitBtn.disabled = false; });
+            .finally(() => { 
+                submitBtn.innerText = originalText; 
+                submitBtn.disabled = false; 
+            });
         });
 
         // ДВИЖОК GALAXY NEON
-        const canvasGame = document.getElementById('gameCanvas'); const ctxGame = canvasGame.getContext('2d');
+        const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
         let gameLoopId; let frames = 0; let score = 0; let isGameOver = false;
         const player = { x: 145, y: 380, w: 30, h: 40 };
         let bullets = []; let enemies = []; let stars = []; let particles = [];
         for(let i=0; i<60; i++) stars.push({ x: Math.random() * 320, y: Math.random() * 450, size: Math.random() * 2, speed: Math.random() * 2 + 0.5, color: Math.random() > 0.5 ? '#0ff' : '#fff' });
         
         function openGameModal() { openModal('gameModal'); drawGame(); }
-        function updatePlayerPos(clientX) { let rect = canvasGame.getBoundingClientRect(); let scaleX = canvasGame.width / rect.width; player.x = (clientX - rect.left) * scaleX - player.w / 2; if (player.x < 0) player.x = 0; if (player.x + player.w > canvasGame.width) player.x = canvasGame.width - player.w; }
+        function updatePlayerPos(clientX) { let rect = canvas.getBoundingClientRect(); let scaleX = canvas.width / rect.width; player.x = (clientX - rect.left) * scaleX - player.w / 2; if (player.x < 0) player.x = 0; if (player.x + player.w > canvas.width) player.x = canvas.width - player.w; }
         
-        canvasGame.addEventListener('mousemove', (e) => { if(!isGameOver) updatePlayerPos(e.clientX); });
-        canvasGame.addEventListener('touchmove', (e) => { if(!isGameOver && e.target === canvasGame) { e.preventDefault(); updatePlayerPos(e.touches[0].clientX); } }, {passive: false});
+        canvas.addEventListener('mousemove', (e) => { if(!isGameOver) updatePlayerPos(e.clientX); });
+        canvas.addEventListener('touchmove', (e) => { if(!isGameOver && e.target === canvas) { e.preventDefault(); updatePlayerPos(e.touches[0].clientX); } }, {passive: false});
         
         function createExplosion(x, y, color) { for(let i=0; i<15; i++) { particles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 6, vy: (Math.random() - 0.5) * 6, life: 1, color: color }); } }
         
         function drawGame() { 
-            ctxGame.fillStyle = 'rgba(5, 5, 10, 0.4)'; ctxGame.fillRect(0, 0, canvasGame.width, canvasGame.height); 
-            stars.forEach(s => { ctxGame.fillStyle = s.color; ctxGame.globalAlpha = Math.random() * 0.5 + 0.5; ctxGame.fillRect(s.x, s.y, s.size, s.size); }); 
-            ctxGame.globalAlpha = 1; 
+            ctx.fillStyle = 'rgba(5, 5, 10, 0.4)'; ctx.fillRect(0, 0, canvas.width, canvas.height); 
+            stars.forEach(s => { ctx.fillStyle = s.color; ctx.globalAlpha = Math.random() * 0.5 + 0.5; ctx.fillRect(s.x, s.y, s.size, s.size); }); 
+            ctx.globalAlpha = 1; 
             
             if(!isGameOver) { 
-                ctxGame.shadowBlur = 15; ctxGame.shadowColor = '#0ff'; ctxGame.fillStyle = 'transparent'; ctxGame.strokeStyle = '#0ff'; ctxGame.lineWidth = 2; 
-                ctxGame.beginPath(); ctxGame.moveTo(player.x + player.w/2, player.y); ctxGame.lineTo(player.x + player.w, player.y + player.h); ctxGame.lineTo(player.x + player.w/2, player.y + player.h - 10); ctxGame.lineTo(player.x, player.y + player.h); ctxGame.closePath(); ctxGame.stroke(); 
-                ctxGame.fillStyle = '#f0f'; ctxGame.shadowColor = '#f0f'; 
-                ctxGame.beginPath(); ctxGame.arc(player.x + player.w/2, player.y + player.h, Math.random() * 4 + 2, 0, Math.PI * 2); ctxGame.fill(); 
+                ctx.shadowBlur = 15; ctx.shadowColor = '#0ff'; ctx.fillStyle = 'transparent'; ctx.strokeStyle = '#0ff'; ctx.lineWidth = 2; 
+                ctx.beginPath(); ctx.moveTo(player.x + player.w/2, player.y); ctx.lineTo(player.x + player.w, player.y + player.h); ctx.lineTo(player.x + player.w/2, player.y + player.h - 10); ctx.lineTo(player.x, player.y + player.h); ctx.closePath(); ctx.stroke(); 
+                ctx.fillStyle = '#f0f'; ctx.shadowColor = '#f0f'; 
+                ctx.beginPath(); ctx.arc(player.x + player.w/2, player.y + player.h, Math.random() * 4 + 2, 0, Math.PI * 2); ctx.fill(); 
             } 
             
-            ctxGame.shadowBlur = 10; ctxGame.shadowColor = '#fff'; ctxGame.fillStyle = '#fff'; 
-            bullets.forEach(b => { ctxGame.fillRect(b.x, b.y, b.w, b.h); }); 
+            ctx.shadowBlur = 10; ctx.shadowColor = '#fff'; ctx.fillStyle = '#fff'; 
+            bullets.forEach(b => { ctx.fillRect(b.x, b.y, b.w, b.h); }); 
             
-            ctxGame.shadowBlur = 15; ctxGame.shadowColor = '#f0f'; ctxGame.strokeStyle = '#f0f'; ctxGame.lineWidth = 2; 
+            ctx.shadowBlur = 15; ctx.shadowColor = '#f0f'; ctx.strokeStyle = '#f0f'; ctx.lineWidth = 2; 
             enemies.forEach(e => { 
-                ctxGame.save(); ctxGame.translate(e.x + e.w/2, e.y + e.h/2); ctxGame.rotate(frames * 0.05); 
-                ctxGame.beginPath(); ctxGame.moveTo(0, -e.h/2); ctxGame.lineTo(e.w/2, 0); ctxGame.lineTo(0, e.h/2); ctxGame.lineTo(-e.w/2, 0); ctxGame.closePath(); ctxGame.stroke(); 
-                ctxGame.restore(); 
+                ctx.save(); ctx.translate(e.x + e.w/2, e.y + e.h/2); ctx.rotate(frames * 0.05); 
+                ctx.beginPath(); ctx.moveTo(0, -e.h/2); ctx.lineTo(e.w/2, 0); ctx.lineTo(0, e.h/2); ctx.lineTo(-e.w/2, 0); ctx.closePath(); ctx.stroke(); 
+                ctx.restore(); 
             }); 
             
-            ctxGame.shadowBlur = 5; 
+            ctx.shadowBlur = 5; 
             particles.forEach(p => { 
-                ctxGame.shadowColor = p.color; ctxGame.fillStyle = p.color; ctxGame.globalAlpha = Math.max(0, p.life); ctxGame.fillRect(p.x, p.y, 3, 3); 
+                ctx.shadowColor = p.color; ctx.fillStyle = p.color; ctx.globalAlpha = Math.max(0, p.life); ctx.fillRect(p.x, p.y, 3, 3); 
             }); 
-            ctxGame.globalAlpha = 1; ctxGame.shadowBlur = 0; 
+            ctx.globalAlpha = 1; ctx.shadowBlur = 0; 
             
-            ctxGame.fillStyle = "#0ff"; ctxGame.font = "bold 16px monospace"; ctxGame.fillText("SCORE: " + score, 10, 25); 
+            ctx.fillStyle = "#0ff"; ctx.font = "bold 16px monospace"; ctx.fillText("SCORE: " + score, 10, 25); 
             
             if(isGameOver) { 
-                ctxGame.fillStyle = 'rgba(0,0,0,0.8)'; ctxGame.fillRect(0,0,canvasGame.width,canvasGame.height); 
-                ctxGame.fillStyle = '#f0f'; ctxGame.font = "bold 28px monospace"; ctxGame.textAlign = "center"; ctxGame.shadowBlur = 20; ctxGame.shadowColor = '#f0f'; 
-                ctxGame.fillText("SYSTEM FAILURE", canvasGame.width/2, canvasGame.height/2); 
-                ctxGame.fillStyle = '#0ff'; ctxGame.font = "18px monospace"; ctxGame.shadowColor = '#0ff'; 
-                ctxGame.fillText("Final Score: " + score, canvasGame.width/2, canvasGame.height/2 + 40); 
-                ctxGame.textAlign = "left"; ctxGame.shadowBlur = 0; 
+                ctx.fillStyle = 'rgba(0,0,0,0.8)'; ctx.fillRect(0,0,canvas.width,canvas.height); 
+                ctx.fillStyle = '#f0f'; ctx.font = "bold 28px monospace"; ctx.textAlign = "center"; ctx.shadowBlur = 20; ctx.shadowColor = '#f0f'; 
+                ctx.fillText("SYSTEM FAILURE", canvas.width/2, canvas.height/2); 
+                ctx.fillStyle = '#0ff'; ctx.font = "18px monospace"; ctx.shadowColor = '#0ff'; 
+                ctx.fillText("Final Score: " + score, canvas.width/2, canvas.height/2 + 40); 
+                ctx.textAlign = "left"; ctx.shadowBlur = 0; 
             } 
         }
         
         function updateGame() { 
-            stars.forEach(s => { s.y += s.speed; if(s.y > canvasGame.height) { s.y = 0; s.x = Math.random() * canvasGame.width; } }); 
+            stars.forEach(s => { s.y += s.speed; if(s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; } }); 
             
             for(let i = particles.length - 1; i >= 0; i--) { 
                 let p = particles[i]; p.x += p.vx; p.y += p.vy; p.life -= 0.03; 
@@ -1332,7 +1372,7 @@
             if (frames % 12 === 0) { bullets.push({ x: player.x + player.w/2 - 1, y: player.y, w: 2, h: 15, speed: 10 }); } 
             bullets.forEach((b, i) => { b.y -= b.speed; if(b.y < 0) bullets.splice(i, 1); }); 
             
-            if (frames % 35 === 0) { enemies.push({ x: Math.random() * (canvasGame.width - 30), y: -30, w: 25, h: 25, speed: Math.random() * 2 + 2 }); } 
+            if (frames % 35 === 0) { enemies.push({ x: Math.random() * (canvas.width - 30), y: -30, w: 25, h: 25, speed: Math.random() * 2 + 2 }); } 
             
             enemies.forEach((e, eIndex) => { 
                 e.y += e.speed; 
@@ -1346,7 +1386,7 @@
                     createExplosion(player.x + player.w/2, player.y + player.h/2, '#0ff'); 
                     isGameOver = true; 
                 } 
-                if (e.y > canvasGame.height) enemies.splice(eIndex, 1); 
+                if (e.y > canvas.height) enemies.splice(eIndex, 1); 
             }); 
         }
         
